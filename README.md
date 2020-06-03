@@ -1,3 +1,5 @@
+![alt text](https://github.com/Xibitol/ZombieLike/blob/master/logo.png?raw=true)
+
 # ZombieLike
 It's a game mode from Garry's Mod. The objective is to kill zombies by infinite waves and with the points you earn you can change weapons, give yourself care, add ammunition...
 
