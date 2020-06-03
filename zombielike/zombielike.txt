@@ -1,0 +1,7 @@
+"zombielike"
+{
+	"base"		"base"
+	"title"		"ZombieLike"
+	"maps"		"^gm_"
+	"menusystem"	"1"
+}
