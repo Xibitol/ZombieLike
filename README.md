@@ -14,8 +14,8 @@ It's a game mode from Garry's Mod. The objective is to kill zombies by infinite 
 
 ### GameStatus
 - _In waiting_
-- [ ] Change the status and send a .net message ("Menu","Playing","WavesTransition","Build")
-- [ ] Call an hook if status is changed
+- [ ] Change the status and send call hook ("Menu","Playing","WavesTransition","Build")
+- [ ] Call think hook ("MenuThink","PlayingThink","WavesTransitionThink","BuildThink")
 
 ### MenuSystem
 - _In waiting_
