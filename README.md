@@ -5,7 +5,7 @@ It's a game mode from Garry's Mod. The objective is to kill zombies by infinite 
 
 Link to gamemode steam page : [ZombieLike]()
 
-**Important :** You must have all the "FA:S 2.0 Alpha SWEPs" addons and the "Map for ZombieLike" addon. A collection to make your life easier : [ZombieLike Collection](https://steamcommunity.com/sharedfiles/filedetails/?id=2119249878)
+**Important :** You must have all "FA:S 2.0 Alpha SWEPs" addons and "Map for ZombieLike" addon. A collection to make your life easier : [ZombieLike Collection](https://steamcommunity.com/sharedfiles/filedetails/?id=2119249878)
 
 ## Modules
 ### Init files
