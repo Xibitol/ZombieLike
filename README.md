@@ -12,7 +12,7 @@ It's a game mode from Garry's Mod. The objective is to kill zombies by infinite 
 - [ ] Select the host player (Change the host if them disconnect)
 - [ ] Get number of player
 
-### GameStatus
+### GameStatus (_MainModule_)
 - _In waiting_
 - [ ] Change the status and send call hook ("Menu","Playing","WavesTransition","Build")
 - [ ] Call think hook ("MenuThink","PlayingThink","WavesTransitionThink","BuildThink")
