@@ -5,13 +5,13 @@ It's a game mode from Garry's Mod. The objective is to kill zombies by infinite 
 
 Link to gamemode steam page : [ZombieLike]()
 
-**Important :** You must have all the "FA:S 2.0 Alpha SWEPs" addons and "Map for ZombieLike". A collection to make your life easier : [ZombieLike Collection](https://steamcommunity.com/sharedfiles/filedetails/?id=2119249878)
+**Important :** You must have all the "FA:S 2.0 Alpha SWEPs" addons and the "Map for ZombieLike" addon. A collection to make your life easier : [ZombieLike Collection](https://steamcommunity.com/sharedfiles/filedetails/?id=2119249878)
 
 ## Modules
 ### Init files
 - In progress
 - [ ] Include all modules
-- [ ] Check if all addons "FA:S 2.0 Alpha SWEPs" and "Map for ZombieLike" is installed (on serveur or client make party), otherwise it stops all script
+- [ ] Check if all "FA:S 2.0 Alpha SWEPs" addons and "Map for ZombieLike" addon is installed (on serveur or on client make game), otherwise it not start all script
 - [x] Send a message when the player connects and spawn
 - [ ] Select the host player (Change the host if them disconnect)
 - [x] Get number of player
