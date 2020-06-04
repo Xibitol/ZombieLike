@@ -1,18 +1,20 @@
-![alt text](https://github.com/Xibitol/ZombieLike/blob/master/logo.png?raw=true)
+![ZombieLike logo with text](https://github.com/Xibitol/ZombieLike/blob/master/logo.png?raw=true)
 
 # ZombieLike
 It's a game mode from Garry's Mod. The objective is to kill zombies by infinite waves and with the points you earn you can change weapons, give yourself care, add ammunition...
 
-**Important :** You must have all the "FA:S 2.0 Alpha SWEPs" addons. 
+Link to gamemode steam page : [ZombieLike]()
+
+**Important :** You must have all the "FA:S 2.0 Alpha SWEPs" addons and "Map for ZombieLike". A collection to make your life easier : [ZombieLike Collection](https://steamcommunity.com/sharedfiles/filedetails/?id=2119249878)
 
 ## Modules
 ### Init files
 - In progress
 - [ ] Include all modules
-- [ ] Check if the addon "FA:S2 weapons" is installed, otherwise it stops the game
+- [ ] Check if all addons "FA:S 2.0 Alpha SWEPs" and "Map for ZombieLike" is installed (on serveur or client make party), otherwise it stops all script
 - [x] Send a message when the player connects and spawn
 - [ ] Select the host player (Change the host if them disconnect)
-- [ ] Get number of player
+- [x] Get number of player
 
 ### GameStatus (_MainModule_)
 - _In waiting_
