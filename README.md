@@ -19,7 +19,7 @@ Link to gamemode steam page : [ZombieLike]()
 
 ### GameStatus (_MainModule_)
 - _In waiting_
-- [ ] Change the status and send call hook ("Menu","Playing","WavesTransition","Build")
+- [ ] Change the status and send call hook ("Menu","Playing","WaveTransition","Build")
 - [ ] Call think hook ("MenuThink","PlayingThink","WavesTransitionThink","BuildThink")
 
 ### MenuSystem
@@ -55,7 +55,7 @@ Link to gamemode steam page : [ZombieLike]()
 ### F4Menu
 - _In waiting_
 - [ ] Draw a F4Menu
-- [ ] Can open if the game status is "waveTransition"
+- [ ] Can open if the game status is "WaveTransition"
 - [ ] Config file for diplay, name and price of weapons, munitions, armor and medic kit
 - [ ] Buy weapons, munitions and armor
 - [ ] Buy a medic kit for 1 usagess
