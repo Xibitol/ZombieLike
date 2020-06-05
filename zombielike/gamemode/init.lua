@@ -1,55 +1,84 @@
 ----- Verify Addons -----
-GM.NecessaryAddons = {
-    ["fas20"] = false,
-    ["FA:S 2.0 Alpha SWEPs - U. Rifles"] = false,
-    ["FA:S 2.0 Alpha SWEPs - SMGs"] = false,
-    ["FA:S 2.0 Alpha SWEPs - Shotguns"] = false,
-    ["FA:S 2.0 Alpha SWEPS - Pistols"] = false,
-    ["FA:S 2.0 Alpha SWEPs - Rifles"] = false,
-    ["fas20misc"] = false
-}
+include("necessary_addons.lua")
 for k, v in ipairs(engine.GetAddons()) do
     for k2, v2 in pairs(GM.NecessaryAddons) do
-        if v.title == k2 and v.mounted == true then
-            GM.NecessaryAddons[k2] = true
+        if v.wsid == k2 and v.mounted == true then
+            GM.NecessaryAddons[k2].installed = true
         end
     end
 end
 for k, v in pairs(GM.NecessaryAddons) do
-    if v == false then
-        error("You must have or this must be mounted :"..k, 1)
+    if v.installed == false then
+        error("You must have or this must be mounted :"..v.name, 1)
     end
+end
+----- Verify Map -----
+if game.GetMap() != "zl_construct" then
+    error("You must play in map : Map for ZombieLike", 1)
 end
 --------------------------------------------------
 
 --------------------------------------------------
-AddCSLuaFile( "cl_init.lua" )
-AddCSLuaFile( "shared.lua" ) 
-include( "shared.lua" )
+ZL = ZL or {}
+AddCSLuaFile("cl_init.lua")
+AddCSLuaFile("shared.lua") 
+include("shared.lua")
 
 ----- Include Module -----
+AddCSLuaFile("modules/gamestatus/game_status.lua")
+include("modules/gamestatus/game_status.lua")
 
-
-
------ Function and variable -----
-GM.PlayerHost = nil
-GM.NumberPlayer = 0
+AddCSLuaFile("modules/menusystem/menu_system.lua")
+--------------------------
+ZL.PlayerHost = nil
+ZL.NumberPlayer = 0
 
 function GM:PlayerConnect(name, ip)
 	PrintMessage(HUD_PRINTTALK, name.." connected to the game.")
     print(name.."/"..ip.." connected")
 end
-
 function GM:PlayerSpawn(ply)
     PrintMessage(HUD_PRINTTALK, ply:Nick().." has spawned.")
-    GAMEMODE.NumberPlayer = GAMEMODE.NumberPlayer + 1
+    ZL.NumberPlayer = ZL.NumberPlayer + 1
 
     if ply == player.GetAll()[1] then
-        GAMEMODE.PlayerHost = ply
+        ZL.PlayerHost = ply
+    end
+
+    local meta = FindMetaTable("Player")
+    ply:SetNWInt("ZombieKilled", 0)
+    ply:SetNWInt("Experiance", 0)
+    ply:SetNWInt("HighestExperiance", 0)
+
+    function meta:GetZombieKilled()
+        return self:GetNWInt("ZombieKilled")
+    end
+    function meta:GetExperiance()
+        return self:GetNWInt("Experiance")
+    end
+    function meta:GetHighestExperiance()
+        return self:GetNWInt("HighestExperiance")
+    end
+
+    function meta:AddZombieKilled(number)
+        return self:SetNWInt("ZombieKilled", self:GetNWInt("ZombieKilled") + number)
+    end
+    function meta:AddExperiance(number)
+        return self:SetNWInt("Experiance", self:GetNWInt("Experiance") + number)
+    end
+    function meta:SetHighestExperiance(number)
+        return self:SetNWInt("HighestExperiance", number)
+    end
+end
+function GM:PlayerDisconnected(ply)
+    PrintMessage(HUD_PRINTTALK, name.." left the game.")
+    ZL.NumberPlayer = ZL.NumberPlayer - 1
+
+    if ply == ZL.PlayerHost and player.GetAll()[1] != nil then
+        ZL.PlayerHost = player.GetAll()[1]
+    elseif ply == ZL.PlayerHost then
+        ZL.PlayerHost = nil
     end
 end
 
-function GM:PlayerDisconnected(ply)
-    PrintMessage(HUD_PRINTTALK, name.." left the game.")
-    GAMEMODE.NumberPlayer = GAMEMODE.NumberPlayer - 1
-end
+ZL:GoInMenu()

@@ -1,0 +1,21 @@
+hook.Add("Menu", "GameMenuStatusHook", function()
+    local frame = vgui.Create( "DFrame" )
+    frame:SetPos(0, 0) 
+    frame:SetSize(ScrW(), ScrH()) 
+    frame:SetTitle("") 
+    frame:SetVisible(true)
+    frame:SetDraggable(false)
+    frame:ShowCloseButton(false)
+    frame:MakePopup()
+
+    local button = vgui.Create("DButton", Frame)
+    button:SetText( "J'en ai marre" )
+    button:SetPos( 100, 100 )
+    button:SetSize( 100, 30 )
+    button.DoClick = function()
+        ZL.GoInPlaying()
+        print(tostring(ZL.GameStatus))
+
+        frame.Remove()
+    end
+end)

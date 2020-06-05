@@ -11,14 +11,14 @@ Link to gamemode steam page : [ZombieLike]()
 ### Init files
 - In progress
 - [ ] Include all modules
-- [ ] Check if all "FA:S 2.0 Alpha SWEPs" addons and "Map for ZombieLike" addon is installed (on serveur or on client make game), otherwise it not start all script
+- [x] Check if all "FA:S 2.0 Alpha SWEPs" addons and "Map for ZombieLike" addon is installed (on serveur or on client make game), otherwise it not start all script
 - [x] Send a message when the player connects and spawn
-- [ ] Select the host player (Change the host if them disconnect)
+- [x] Select the host player (Change the host if them disconnect)
 - [x] Get number of player
-- [ ] Set player network variable ("ZombieKilled","Experiance","HighestExperiance")
+- [x] Set player network variable ("ZombieKilled","Experiance","HighestExperiance")
 
 ### GameStatus (_MainModule_)
-- _In waiting_
+- In progress
 - [ ] Change the status and send call hook ("Menu","Playing","WaveTransition","Build")
 - [ ] Call think hook ("MenuThink","PlayingThink","WaveTransitionThink","BuildThink")
 
