@@ -15,6 +15,7 @@ Link to gamemode steam page : [ZombieLike]()
 - [x] Send a message when the player connects and spawn
 - [ ] Select the host player (Change the host if them disconnect)
 - [x] Get number of player
+- [ ] Set network variable ("ZombieKilled","Experiance","HighestExperiance")
 
 ### GameStatus (_MainModule_)
 - _In waiting_
@@ -38,9 +39,9 @@ Link to gamemode steam page : [ZombieLike]()
 
 ### ZombieManager
 - _In waiting_
-- [ ] Spawn zombie randomly on maps (Defined place)
+- [ ] Config file for expericance by zombie and zombie type
 - [ ] Choose the number of zombies in relation to the player number
-- [ ] Choose type of zombie
+- [ ] Spawn zombie randomly on maps (Defined place)
 - [ ] Creating infinite waves
 - [ ] Give point to player on kill zombie
 
