@@ -20,7 +20,7 @@ Link to gamemode steam page : [ZombieLike]()
 ### GameStatus (_MainModule_)
 - _In waiting_
 - [ ] Change the status and send call hook ("Menu","Playing","WaveTransition","Build")
-- [ ] Call think hook ("MenuThink","PlayingThink","WavesTransitionThink","BuildThink")
+- [ ] Call think hook ("MenuThink","PlayingThink","WaveTransitionThink","BuildThink")
 
 ### MenuSystem
 - _In waiting_
