@@ -24,7 +24,7 @@ Link to gamemode steam page : [ZombieLike]()
 
 ### MenuSystem
 - _In waiting_
-- [ ] List of player with a tag for host (It show player stats if game is just stopped)
+- [ ] List of player with a tag for host
 - [ ] Display the game description
 - [ ] Display the highest score
 - [ ] Can choose player model and name
