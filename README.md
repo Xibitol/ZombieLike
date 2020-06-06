@@ -30,7 +30,7 @@ Link to gamemode steam page : [ZombieLike]()
 - [x] Function for draw a box with border and rounded box with border
 - [x] Function for draw a outline box and rounded outline box
 - [x] Function for draw a text (Can choose police : "ZL200", "ZL100", "ZL50", "ZL28", "ZL10")
-- [ ] Function for draw multiple text with different color, font in one text
+- [ ] Function for get text size by selecting font
 
 ### MenuSystem
 - In progress
