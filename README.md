@@ -11,7 +11,7 @@ Link to gamemode steam page : [ZombieLike]()
 ### Init files
 - In progress
 - [ ] Include all modules
-- [ ] Create ZL module for a global table
+- [ ] Create ZL module
 - [x] Check if all "FA:S 2.0 Alpha SWEPs" addons and "Map for ZombieLike" addon is installed (on serveur or on client make game), otherwise it not start all script
 - [x] Send a message when the player connects and spawn
 - [x] Select the host player (Change the host if he disconnect)
@@ -19,9 +19,17 @@ Link to gamemode steam page : [ZombieLike]()
 - [x] Set player network variable ("ZombieKilled","Experiance","HighestExperiance")
 
 ### GameStatus (_MainModule_)
-- In progress
+- **Finished**
 - [ ] Change the status and send call hook ("Menu","Playing","WaveTransition","Build")
 - [ ] Call think hook ("MenuThink","PlayingThink","WaveTransitionThink","BuildThink")
+
+### ZLDraw (_MainDrawModule_)
+- In progress
+- [ ] Create ZLDraw module
+- [ ] Function for draw a rounded box (If border raduis = to 0, this is a simply box)
+- [ ] Function for draw a rounded box with border (If border raduis = to 0, this is a simply box with border)
+- [ ] Function for draw a outline box
+- [ ] Function for draw a text (Can choose police)
 
 ### MenuSystem
 - _In waiting_
