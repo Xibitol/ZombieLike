@@ -26,13 +26,11 @@ Link to gamemode steam page : [ZombieLike]()
 ### ZLDraw (_MainDrawModule_)
 - **Finished**
 - [x] Create ZLDraw module
-- [x] Function for draw a box
-- [x] Function for draw a rounded box
-- [x] Function for draw a box with border
-- [x] Function for draw a rounded box with border
-- [x] Function for draw a outline box
-- [x] Function for draw a rounded outline box
+- [x] Function for draw a box and rounded box
+- [x] Function for draw a box with border and rounded box with border
+- [x] Function for draw a outline box and rounded outline box
 - [x] Function for draw a text (Can choose police : "ZL200", "ZL100", "ZL50", "ZL28", "ZL10")
+- [ ] Function for draw multiple text with different color, font in one text
 
 ### MenuSystem
 - In progress
