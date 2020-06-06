@@ -16,17 +16,20 @@ end
 if game.GetMap() != "zl_construct" then
     error("You must play in map : Map for ZombieLike", 1)
 end
---------------------------------------------------
+--[[----------------------------------------------
 
---------------------------------------------------
-ZL = ZL or {}
+    /\ DO NOT CHANGE ANYTHING /\
+
+--]]----------------------------------------------
 AddCSLuaFile("cl_init.lua")
 AddCSLuaFile("shared.lua") 
 include("shared.lua")
 
 ----- Include Module -----
-AddCSLuaFile("modules/gamestatus/game_status.lua")
+AddCSLuaFile("modules/gamestatus/game_status.lua") -- Main Module
 include("modules/gamestatus/game_status.lua")
+
+AddCSLuaFile("modules/zldraw/zl_draw.lua") -- Main draw module
 
 AddCSLuaFile("modules/menusystem/menu_system.lua")
 --------------------------
@@ -80,5 +83,3 @@ function GM:PlayerDisconnected(ply)
         ZL.PlayerHost = nil
     end
 end
-
-ZL:GoInMenu()

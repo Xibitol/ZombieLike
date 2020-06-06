@@ -6,21 +6,29 @@ ZL.GameStatus = nil
     3 = Build
 ]]
 
-function ZL:GoInMenu()
+function ZL.GoInMenu()
     ZL.GameStatus = 0
     hook.Run("Menu")
+
+    print("Game status changed in "..ZL.GameStatus)
 end
-function ZL:GoInPlaying()
+function ZL.GoInPlaying()
     ZL.GameStatus = 1
     hook.Run("Playing")
+
+    print("Game status changed in "..ZL.GameStatus)
 end
-function ZL:GoInWaveTransition()
+function ZL.GoInWaveTransition()
     ZL.GameStatus = 2
     hook.Run("WaveTransition")
+
+    print("Game status changed in "..ZL.GameStatus)
 end
-function ZL:GoInBuild()
+function ZL.GoInBuild()
     ZL.GameStatus = 3
     hook.Run("Build")
+
+    print("Game status changed in "..ZL.GameStatus)
 end
 
 function GM:Think()
