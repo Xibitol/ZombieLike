@@ -30,7 +30,6 @@ AddCSLuaFile("modules/gamestatus/game_status.lua") -- Main Module
 include("modules/gamestatus/game_status.lua")
 
 AddCSLuaFile("modules/zldraw/zl_draw.lua") -- Main draw module
-
 AddCSLuaFile("modules/menusystem/menu_system.lua")
 --------------------------
 ZL.PlayerHost = nil
