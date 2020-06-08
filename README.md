@@ -19,27 +19,29 @@ Link to gamemode steam page : [ZombieLike]()
 - [x] Set player network variable ("ZombieKilled","Experiance","HighestExperiance")
 
 ### GameStatus (_MainModule_)
-- **Finished**
-- [x] Change the status and send call hook ("Menu","Playing","WaveTransition","Build")
+- In progress
+- [x] Change the status and send call hook ("Menu","Play","WaveTransition","Build")
+- [ ] On Playing, give initial weapon ("fas2_machete", "fas2_p226")
+- [ ] On Build, give physgun
 - [x] Call think hook ("MenuThink","PlayingThink","WaveTransitionThink","BuildThink")
 
 ### ZLDraw (_MainDrawModule_)
-- In progress
+- **Finished**
 - [x] Create ZLDraw module
 - [x] Function for draw a box and rounded box
 - [x] Function for draw a box with border and rounded box with border
-- [x] Function for draw a outline box and rounded outline box
+- [x] Function for draw a outline box
+- [x] Function for draw image
 - [x] Function for draw a text (Can choose police : "ZL200", "ZL100", "ZL50", "ZL28", "ZL10")
-- [ ] Function for draw image
 - [x] Function for draw multiple text with different color and font in one line
 - [x] Function for get text size by selecting font
 
 ### MenuSystem
 - In progress
 - [ ] List of player with a tag for host
+- [ ] Can choose player model and name
 - [ ] Display the game description
 - [ ] Display the highest score
-- [ ] Can choose player model and name
 - [ ] The host can start game
 - [ ] The host can go in build mode (For add props in world)
 
@@ -71,7 +73,14 @@ Link to gamemode steam page : [ZombieLike]()
 - [ ] Config file for diplay, name and price of weapons, munitions, armor and medic kit
 - [ ] Buy weapons, munitions and armor
 - [ ] Buy a medic kit for 1 usagess
-- [ ] The host can stop the game (By keeping the stats)
+- [ ] The host can stop the game
+
+### F1Menu
+- _In waiting_
+- [ ] Draw a F1Menu
+- [ ] Can open if the game status is "Build"
+- [ ] Spawn, in config file, preselected prop
+- [ ] The host can return in menu
 
 ### ScoreBoardDraw
 - _In waiting_

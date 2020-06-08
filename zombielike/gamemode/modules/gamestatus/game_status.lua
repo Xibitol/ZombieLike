@@ -12,9 +12,9 @@ function ZL.GoInMenu()
 
     print("Game status changed in "..ZL.GameStatus)
 end
-function ZL.GoInPlaying()
+function ZL.GoInPlay()
     ZL.GameStatus = 1
-    hook.Run("Playing")
+    hook.Run("Play")
 
     print("Game status changed in "..ZL.GameStatus)
 end
@@ -35,7 +35,7 @@ function GM:Think()
     if ZL.GameStatus == 0 then
         hook.Run("MenuThink")
     elseif ZL.GameStatus == 1 then
-        hook.Run("PlayingThink")
+        hook.Run("PlayThink")
     elseif ZL.GameStatus == 2 then
         hook.Run("WaveTransitionThink")
     elseif ZL.GameStatus == 3 then

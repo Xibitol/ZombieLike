@@ -34,6 +34,7 @@ AddCSLuaFile("modules/menusystem/menu_system.lua")
 --------------------------
 ZL.PlayerHost = nil
 ZL.NumberPlayer = 0
+ZL.HighestScore = 15
 
 function GM:PlayerConnect(name, ip)
 	PrintMessage(HUD_PRINTTALK, name.." connected to the game.")

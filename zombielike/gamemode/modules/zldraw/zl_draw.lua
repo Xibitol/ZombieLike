@@ -1,11 +1,22 @@
-module("ZLDraw", package.seeall)
+local surface = surface
+local draw = draw
+local ipairs = ipairs
+local Color = Color
+local Material = Material
+
+local fontLoaded = false
+module("ZLDraw")
 
 ----- Create font -----
-surface.CreateFont("ZL200", {font = "Comic Sans MS", size = 200})
-surface.CreateFont("ZL100", {font = "Comic Sans MS", size = 100})
-surface.CreateFont("ZL50", {font = "Comic Sans MS", size = 50})
-surface.CreateFont("ZL28", {font = "Comic Sans MS", size = 28})
-surface.CreateFont("ZL10", {font = "Comic Sans MS", size = 20})
+function LoadFont()
+    surface.CreateFont("ZL200", {font = "Comic Sans MS", size = 200})
+    surface.CreateFont("ZL100", {font = "Comic Sans MS", size = 100})
+    surface.CreateFont("ZL50", {font = "Comic Sans MS", size = 50})
+    surface.CreateFont("ZL28", {font = "Comic Sans MS", size = 28})
+    surface.CreateFont("ZL10", {font = "Comic Sans MS", size = 20})
+
+    fontloaded = true
+end
 
 ----- Text Align -----
 TEXT_ALIGN_LEFT		= 0
@@ -15,7 +26,7 @@ TEXT_ALIGN_TOP		= 3
 TEXT_ALIGN_BOTTOM	= 4
 
 ----- Color function -----
-local function SetColor(color)
+function SetColor(color)
     if color == "white" then
         return Color(255, 255, 255, 255)
     elseif color == "green" then
@@ -31,20 +42,20 @@ local function SetColor(color)
     end
 end
 
------ Draw function -----
-function ZLDraw.Box(x, y, w, h, color)
+----- Draw box function -----
+function Box(x, y, w, h, color)
     color = SetColor(color)
 
     surface.SetDrawColor(color.r, color.g, color.b, color.a)
     surface.DrawRect(x, y, w, h)
 end
-function ZLDraw.RoundedBox(cornerRadius, x, y, w, h, color)
+function RoundedBox(cornerRadius, x, y, w, h, color)
     color = SetColor(color)
 
     draw.RoundedBox(cornerRadius, x, y, w, h, color)
 end
 
-function ZLDraw.BoxBorder(x, y, w, h, color, borderRadius, borderColor)
+function BoxBorder(x, y, w, h, color, borderRadius, borderColor)
     if borderRadius == 0 then
         Box(x, y, w, h, color)
     else
@@ -56,7 +67,7 @@ function ZLDraw.BoxBorder(x, y, w, h, color, borderRadius, borderColor)
         Box(x, y, borderRadius, h) -- RIGHT
     end
 end
-function ZLDraw.RoundedBoxBorder(cornerRaduis, x, y, w, h, color, borderRadius, borderColor)
+function RoundedBoxBorder(cornerRaduis, x, y, w, h, color, borderRadius, borderColor)
     if borderRadius == 0 and cornerRaduis == 0 then
         Box(x, y, w, h, color)
     elseif cornerRadius == 0 then
@@ -73,35 +84,30 @@ function ZLDraw.RoundedBoxBorder(cornerRaduis, x, y, w, h, color, borderRadius, 
     end
 end
 
-function ZLDraw.OutlineBox(x, y, w, h, color, borderRadius)
+function OutlineBox(x, y, w, h, color, borderRadius)
     if borderRadius == 0 then
         return
     else
-        Box(x, y, w, borderRadius) -- UP
-        Box(x + w - borderRadius, y, borderRadius, h) -- LEFT
-        Box(x, y + h - borderRadius, w, borderRadius) -- DOWN
-        Box(x, y, borderRadius, h) -- RIGHT
-    end
-end
-function ZLDraw.RoundedOutlineBox(cornerRaduis, x, y, w, h, color, borderRadius)
-    if borderRadius == 0 then
-        return
-    else
-        RoundedBox(x, y, w, borderRadius, color) -- UP
-        RoundedBox(x + w - borderRadius, y, borderRadius, h, color) -- LEFT
-        RoundedBox(x, y + h - borderRadius, w, borderRadius, color) -- DOWN
-        RoundedBox(x, y, borderRadius, h, color) -- RIGHT
+        Box(x, y, w, borderRadius, color) -- UP
+        Box(x + w - borderRadius, y, borderRadius, h, color) -- LEFT
+        Box(x, y + h - borderRadius, w, borderRadius, color) -- DOWN
+        Box(x, y, borderRadius, h, color) -- RIGHT
     end
 end
 
--- Not working
-function Image(x, y, w, h, material)
-    surface.SetMaterial(Material(material, "noclamp smooth"))
-    surface.SetDrawColor(255, 255, 255, 255)
+----- Draw image function -----
+function Image(x, y, w, h, material, color)
+    color = SetColor(color)
+
+    surface.SetDrawColor(color.r, color.g, color.b, color.a)
+    surface.SetMaterial(Material(material, "alphatest smooth"))
     surface.DrawTexturedRect(x, y, w, h)
 end
 
-function ZLDraw.Text(text, font, x, y, color, xalign, yalign)
+----- Draw text function -----
+function Text(text, font, x, y, color, xalign, yalign)
+    if fontLoaded == false then return end
+
     color = SetColor(color)
     xalign = xalign or TEXT_ALIGN_LEFT
 	yalign = yalign or TEXT_ALIGN_TOP
@@ -130,7 +136,9 @@ end
         {text = "Like", color = Color(237, 30, 121, 255), font = "ZL200"}
     })
 ]]
-function ZLDraw.Texts(x, y, xalign, yalign, texts)
+function Texts(x, y, xalign, yalign, texts)
+    if fontLoaded == false then return end
+
     xalign = xalign or TEXT_ALIGN_LEFT
 	yalign = yalign or TEXT_ALIGN_TOP
     local text = ""
@@ -157,16 +165,12 @@ function ZLDraw.Texts(x, y, xalign, yalign, texts)
 	end
 
     for k, v in pairs(texts) do
-        local color = SetColor(v.color)
-        surface.SetTextColor(color.r, color.g, color.b, color.a)
-        surface.SetFont(v.font)
-        surface.SetTextPos(x, y)
-        surface.DrawText(v.text)
+        Text(v.text, v.font, x, y, v.color, xalign, yalign)
 
         x = x + GetTextSize(v.text, v.font)
     end
 end
-function ZLDraw.GetTextSize(text, font)
+function GetTextSize(text, font)
     surface.SetFont(font)
     return surface.GetTextSize(text)
 end
