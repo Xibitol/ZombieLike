@@ -26,11 +26,13 @@ AddCSLuaFile("shared.lua")
 include("shared.lua")
 
 ----- Include Module -----
-AddCSLuaFile("modules/gamestatus/game_status.lua") -- Main Module
-include("modules/gamestatus/game_status.lua")
+AddCSLuaFile("modules/gamestatus/sh_gamestatus.lua") -- Main Module
+include("modules/gamestatus/sh_gamestatus.lua")
 
 AddCSLuaFile("modules/zldraw/zl_draw.lua") -- Main draw module
-AddCSLuaFile("modules/menusystem/menu_system.lua")
+
+AddCSLuaFile("modules/menusystem/cl_menusystem.lua")
+include("modules/menusystem/sv_menusystem.lua")
 --------------------------
 ZL.PlayerHost = nil
 ZL.NumberPlayer = 0
@@ -47,6 +49,8 @@ function GM:PlayerSpawn(ply)
     if ply == player.GetAll()[1] then
         ZL.PlayerHost = ply
     end
+
+    ply:SetModel("models/player/combine_soldier.mdl")
 
     local meta = FindMetaTable("Player")
     ply:SetNWInt("ZombieKilled", 0)

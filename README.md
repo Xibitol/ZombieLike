@@ -15,6 +15,7 @@ Link to gamemode steam page : [ZombieLike]()
 - [x] Check if all "FA:S 2.0 Alpha SWEPs" addons and "Map for ZombieLike" addon is installed (on serveur or on client make game), otherwise it not start all script
 - [x] Send a message when the player connects and spawn
 - [x] Select the host player (Change the host if he disconnect)
+- [x] Set player model
 - [x] Get number of player
 - [x] Set player network variable ("ZombieKilled","Experiance","HighestExperiance")
 
@@ -39,7 +40,7 @@ Link to gamemode steam page : [ZombieLike]()
 ### MenuSystem
 - In progress
 - [ ] List of player with a tag for host
-- [ ] Can choose player model and name
+- [ ] Can choose player's model, model color and name
 - [ ] Display the game description
 - [ ] Display the highest score
 - [ ] The host can start game

@@ -1,11 +1,13 @@
 include( "shared.lua" )
 
 ----- Include Module -----
-include("modules/gamestatus/game_status.lua") -- Main module
+include("modules/gamestatus/sh_gamestatus.lua") -- Main module
 
 include("modules/zldraw/zl_draw.lua") -- Main draw module
 ZLDraw.LoadFont()
 
-include("modules/menusystem/menu_system.lua")
+include("modules/menusystem/cl_menusystem.lua")
 --------------------------
-ZL.GoInMenu()
+function GM:InitPostEntity()
+	ZL.GoInMenu()
+end

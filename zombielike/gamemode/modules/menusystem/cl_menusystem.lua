@@ -18,6 +18,7 @@ hook.Add("Menu", "GameMenuStatusHook", function()
         ZLDraw.Image(w/2 - 576/2, 20, 576, 256, "logo2x.png", "white")
     end
 
+
     -- Player list
     local playerList = vgui.Create("DScrollPanel", main)
     playerList:SetPos(100, 300)
@@ -26,24 +27,47 @@ hook.Add("Menu", "GameMenuStatusHook", function()
         ZLDraw.OutlineBox(0, 0, w, h, "pink", 4)
     end
 
+
     -- Player info
     local model = vgui.Create("DModelPanel", main)
     model:SetPos(ScrW()/2 - 450/2, 300)
     model:SetSize(450, 400)
-    model:SetModel("models/player/Group01/male_07.mdl")
-    --[[model.Paint = function(s, w, h)
-        ZLDraw.OutlineBox(0, 0, w, h, "white", 4)
-    end]]
+    model:SetModel(LocalPlayer():GetModel())
     model:SetCamPos(Vector(75, 0, 50))
     function model:LayoutEntity(entity)end
     function model.Entity:GetPlayerColor() return ZLDraw.SetColor("white") end
-    local name = vgui.Create( "DTextEntry", main) -- create the form as a child of frame
-    name:SetPos(75, 50)
-    name:SetSize(75, 85)
-    name:SetValue(LocalPlayer():Nick())
-    name.OnEnter = function( self )
-	    
+
+    local name = vgui.Create( "DLabel", main) -- create the form as a child of frame
+    name:SetPos(ScrW()/2 - 100, 750)
+    name:SetSize(200, 40)
+    name:SetText(LocalPlayer():GetName())
+    name:SetFont("ZL28")
+    name:SetTextColor(ZLDraw.SetColor("white"))
+
+    local setName = vgui.Create( "DTextEntry", main) -- create the form as a child of frame
+    setName:SetPos(ScrW()/2 - 275, 750)
+    setName:SetSize(120, 40)
+    setName:SetFont("ZL10")
+    setName:SetValue(LocalPlayer():Nick())
+    setName.OnEnter = function(self)
+        net.Start("SetName")
+        net.WriteEntity(LocalPlayer())
+        net.WriteString(self:GetValue())
+        net.SendToServer()
+
+        name:SetText(LocalPlayer():GetName())
     end
+
+    local modelColor = vgui.Create( "DColorMixer", main)
+    modelColor:SetPos(ScrW()/2 + 75, 735)
+    modelColor:SetSize(200, 70)
+    modelColor:SetBaseColor(false)
+    modelColor:SetAlphaBar(false)
+    modelColor:SetWangs(false)
+    modelColor:SetPalette(true)
+    modelColor:SetColor(Color(255, 255, 255))
+
+
 
     -- Description and Highest Score
     local desc = vgui.Create("DPanel", main)
@@ -52,6 +76,7 @@ hook.Add("Menu", "GameMenuStatusHook", function()
     desc.Paint = function(s, w, h)
         ZLDraw.OutlineBox(0, 0, w, h, "green", 4)
     end
+
 
     -- Button
     local startBtn = vgui.Create("DButton", main)
@@ -67,6 +92,7 @@ hook.Add("Menu", "GameMenuStatusHook", function()
         ZL.GoInPlay()
         main:Remove()
     end
+
     local BuildBtn = vgui.Create("DButton", main)
     BuildBtn:SetPos(ScrW()/2 + 200, ScrH() - 150)
     BuildBtn:SetSize(400, 100)
