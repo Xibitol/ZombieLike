@@ -27,6 +27,15 @@ hook.Add("Menu", "GameMenuStatusHook", function()
         ZLDraw.OutlineBox(0, 0, w, h, "pink", 4)
     end
 
+    for k,v in ipairs(player.GetAll()) do
+        local plyBox = playerList:Add("DPanel")
+        plyBox:SetHeight(50)
+        plyBox:Dock(TOP)
+	    plyBox:DockMargin(9, 0, 5, 5)
+        plyBox.Paint = function(s, w, h)
+            ZLDraw.OutlineBox(0, 0, w, h, "pink", 1)
+        end
+    end
 
     -- Player info
     local model = vgui.Create("DModelPanel", main)
@@ -37,45 +46,46 @@ hook.Add("Menu", "GameMenuStatusHook", function()
     function model:LayoutEntity(entity)end
     function model.Entity:GetPlayerColor() return ZLDraw.SetColor("white") end
 
-    local name = vgui.Create( "DLabel", main) -- create the form as a child of frame
-    name:SetPos(ScrW()/2 - 100, 750)
+    local name = vgui.Create("DLabel", main)
+    name:SetPos(ScrW()/2 - 250, 750)
     name:SetSize(200, 40)
     name:SetText(LocalPlayer():GetName())
-    name:SetFont("ZL28")
+    name:SetFont("ZL40")
     name:SetTextColor(ZLDraw.SetColor("white"))
 
-    local setName = vgui.Create( "DTextEntry", main) -- create the form as a child of frame
-    setName:SetPos(ScrW()/2 - 275, 750)
-    setName:SetSize(120, 40)
-    setName:SetFont("ZL10")
-    setName:SetValue(LocalPlayer():Nick())
-    setName.OnEnter = function(self)
-        net.Start("SetName")
-        net.WriteEntity(LocalPlayer())
-        net.WriteString(self:GetValue())
-        net.SendToServer()
-
-        name:SetText(LocalPlayer():GetName())
-    end
-
-    local modelColor = vgui.Create( "DColorMixer", main)
-    modelColor:SetPos(ScrW()/2 + 75, 735)
-    modelColor:SetSize(200, 70)
-    modelColor:SetBaseColor(false)
-    modelColor:SetAlphaBar(false)
-    modelColor:SetWangs(false)
-    modelColor:SetPalette(true)
+    local modelColor = vgui.Create( "DColorPalette", main)
+    modelColor:SetPos(ScrW()/2, 750)
+    modelColor:SetSize(250, 50)
     modelColor:SetColor(Color(255, 255, 255))
-
-
+    modelColor:SetButtonSize(15)
+    modelColor.OnValueChanged = function(s, color)
+        local meta = FindMetaTable("Player")
+        function meta:GetPlayerColor() return Vector(color.r/255, color.g/255, color.b/255) end
+        function model.Entity:GetPlayerColor() return LocalPlayer():GetPlayerColor() end
+    end
 
     -- Description and Highest Score
-    local desc = vgui.Create("DPanel", main)
-    desc:SetPos(ScrW() - 650, 300)
-    desc:SetSize(550, 500)
-    desc.Paint = function(s, w, h)
+    local game = vgui.Create("DPanel", main)
+    game:SetPos(ScrW() - 650, 300)
+    game:SetSize(550, 500)
+    game.Paint = function(s, w, h)
         ZLDraw.OutlineBox(0, 0, w, h, "green", 4)
     end
+
+    local desc = vgui.Create("DLabel", game)
+    desc:SetPos(25, 25)
+    desc:SetSize(500, 100)
+    desc:SetText(ZL.Description)
+    desc:SetFont("ZL28")
+    desc:SetTextColor(ZLDraw.SetColor("white"))
+    desc:SetWrap(true)
+
+    local highestScore = vgui.Create("DLabel", game)
+    highestScore:SetPos(25, 400)
+    highestScore:SetSize(500, 100)
+    highestScore:SetText("Highest score, highest run reached : "..ZL.HighestScore)
+    highestScore:SetFont("ZL28")
+    highestScore:SetTextColor(ZLDraw.SetColor("white"))
 
 
     -- Button

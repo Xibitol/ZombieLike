@@ -12,6 +12,7 @@ function LoadFont()
     surface.CreateFont("ZL200", {font = "Comic Sans MS", size = 200})
     surface.CreateFont("ZL100", {font = "Comic Sans MS", size = 100})
     surface.CreateFont("ZL50", {font = "Comic Sans MS", size = 50})
+    surface.CreateFont("ZL40", {font = "Comic Sans MS", size = 40})
     surface.CreateFont("ZL28", {font = "Comic Sans MS", size = 28})
     surface.CreateFont("ZL10", {font = "Comic Sans MS", size = 20})
 

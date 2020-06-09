@@ -34,10 +34,6 @@ AddCSLuaFile("modules/zldraw/zl_draw.lua") -- Main draw module
 AddCSLuaFile("modules/menusystem/cl_menusystem.lua")
 include("modules/menusystem/sv_menusystem.lua")
 --------------------------
-ZL.PlayerHost = nil
-ZL.NumberPlayer = 0
-ZL.HighestScore = 15
-
 function GM:PlayerConnect(name, ip)
 	PrintMessage(HUD_PRINTTALK, name.." connected to the game.")
     print(name.."/"..ip.." connected")
@@ -50,7 +46,7 @@ function GM:PlayerSpawn(ply)
         ZL.PlayerHost = ply
     end
 
-    ply:SetModel("models/player/combine_soldier.mdl")
+    ply:SetModel("models/player/Group01/male_02.mdl")
 
     local meta = FindMetaTable("Player")
     ply:SetNWInt("ZombieKilled", 0)

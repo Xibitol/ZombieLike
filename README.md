@@ -1,7 +1,7 @@
 ![ZombieLike logo with text](https://github.com/Xibitol/ZombieLike/blob/master/logo.png?raw=true)
 
 # ZombieLike
-It's a game mode from Garry's Mod. The objective is to kill zombies by infinite waves and with the points you earn you can change weapons, give yourself care, add ammunition...
+It's a game mode from Garry's Mod. The objective is to kill zombies by infinite waves and with the points you earn you can buy weapons, give yourself care, add armor...
 
 Link to gamemode steam page : [ZombieLike]()
 
@@ -40,9 +40,8 @@ Link to gamemode steam page : [ZombieLike]()
 ### MenuSystem
 - In progress
 - [ ] List of player with a tag for host
-- [ ] Can choose player's model, model color and name
-- [ ] Display the game description
-- [ ] Display the highest score
+- [x] Can choose player's model and model color
+- [x] Display the game description and the highest score
 - [ ] The host can start game
 - [ ] The host can go in build mode (For add props in world)
 

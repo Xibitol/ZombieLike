@@ -11,3 +11,7 @@ include("modules/menusystem/cl_menusystem.lua")
 function GM:InitPostEntity()
 	ZL.GoInMenu()
 end
+
+concommand.Add("menu", function()
+	ZL.GoInMenu()
+end)
