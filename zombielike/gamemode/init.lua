@@ -26,13 +26,12 @@ AddCSLuaFile("shared.lua")
 include("shared.lua")
 
 ----- Include Module -----
-AddCSLuaFile("modules/gamestatus/sh_gamestatus.lua") -- Main Module
-include("modules/gamestatus/sh_gamestatus.lua")
+AddCSLuaFile("modules/gamestatus/cl_gamestatus.lua") -- Main Module
+include("modules/gamestatus/sv_gamestatus.lua")
 
 AddCSLuaFile("modules/zldraw/zl_draw.lua") -- Main draw module
 
 AddCSLuaFile("modules/menusystem/cl_menusystem.lua")
-include("modules/menusystem/sv_menusystem.lua")
 --------------------------
 function GM:PlayerConnect(name, ip)
 	PrintMessage(HUD_PRINTTALK, name.." connected to the game.")
@@ -40,11 +39,6 @@ function GM:PlayerConnect(name, ip)
 end
 function GM:PlayerSpawn(ply)
     PrintMessage(HUD_PRINTTALK, ply:Nick().." has spawned.")
-    ZL.NumberPlayer = ZL.NumberPlayer + 1
-
-    if ply == player.GetAll()[1] then
-        ZL.PlayerHost = ply
-    end
 
     ply:SetModel("models/player/Group01/male_02.mdl")
 
@@ -75,11 +69,4 @@ function GM:PlayerSpawn(ply)
 end
 function GM:PlayerDisconnected(ply)
     PrintMessage(HUD_PRINTTALK, name.." left the game.")
-    ZL.NumberPlayer = ZL.NumberPlayer - 1
-
-    if ply == ZL.PlayerHost and player.GetAll()[1] != nil then
-        ZL.PlayerHost = player.GetAll()[1]
-    elseif ply == ZL.PlayerHost then
-        ZL.PlayerHost = nil
-    end
 end

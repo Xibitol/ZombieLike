@@ -14,9 +14,7 @@ Link to gamemode steam page : [ZombieLike]()
 - [x] Create ZL module
 - [x] Check if all "FA:S 2.0 Alpha SWEPs" addons and "Map for ZombieLike" addon is installed (on serveur or on client make game), otherwise it not start all script
 - [x] Send a message when the player connects and spawn
-- [x] Select the host player (Change the host if he disconnect)
 - [x] Set player model
-- [x] Get number of player
 - [x] Set player network variable ("ZombieKilled","Experiance","HighestExperiance")
 
 ### GameStatus (_MainModule_)
@@ -25,6 +23,7 @@ Link to gamemode steam page : [ZombieLike]()
 - [ ] On Playing, give initial weapon ("fas2_machete", "fas2_p226")
 - [ ] On Build, give physgun
 - [x] Call think hook ("MenuThink","PlayingThink","WaveTransitionThink","BuildThink")
+- [x] Update Client or Server side
 
 ### ZLDraw (_MainDrawModule_)
 - **Finished**
@@ -39,6 +38,7 @@ Link to gamemode steam page : [ZombieLike]()
 
 ### MenuSystem
 - In progress
+- [ ] Select the host player (Change the host if he disconnect)
 - [ ] List of player with a tag for host
 - [x] Can choose player's model and model color
 - [x] Display the game description and the highest score

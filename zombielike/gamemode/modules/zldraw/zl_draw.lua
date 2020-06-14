@@ -2,7 +2,6 @@ local surface = surface
 local draw = draw
 local ipairs = ipairs
 local Color = Color
-local Material = Material
 
 local fontLoaded = false
 module("ZLDraw")
@@ -101,7 +100,7 @@ function Image(x, y, w, h, material, color)
     color = SetColor(color)
 
     surface.SetDrawColor(color.r, color.g, color.b, color.a)
-    surface.SetMaterial(Material(material, "alphatest smooth"))
+    surface.SetMaterial(material)
     surface.DrawTexturedRect(x, y, w, h)
 end
 

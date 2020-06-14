@@ -1,6 +1,28 @@
+local main = nil
+local playerList = nil
+
+function ReloadPlayerList()
+    playerList:Clear()
+
+    for i=0, 10 do--k,v in ipairs(player.GetAll()) do
+        local plyBox = playerList:Add("DPanel")
+        plyBox:SetHeight(50)
+        plyBox:Dock(TOP)
+	    plyBox:DockMargin(9, 5, 5, 0)
+        plyBox.Paint = function(s, w, h)
+            ZLDraw.OutlineBox(0, 0, w, h, "pink", 1)
+        end
+
+        local plyAvatar = vgui.Create("AvatarImage", plyBox)
+        plyAvatar:SetPos(3, 3)
+        plyAvatar:SetSize(44, 44)
+        plyAvatar:SetPlayer(LocalPlayer(), 44)
+    end
+end
+
 hook.Add("Menu", "GameMenuStatusHook", function()
     -- Main
-    local main = vgui.Create("DFrame")
+    main = vgui.Create("DFrame")
     main:SetPos(0, 0)
     main:SetSize(ScrW(), ScrH())
     main:SetTitle("")
@@ -15,27 +37,34 @@ hook.Add("Menu", "GameMenuStatusHook", function()
             {text = "Zombie", color = "green", font = "ZL200"},
             {text = "Like", color = "pink", font = "ZL200"}
         })]]
-        ZLDraw.Image(w/2 - 576/2, 20, 576, 256, "logo2x.png", "white")
+        ZLDraw.Image(w/2 - 576/2, 20, 576, 256, Material("logo2x.png", "alphatest smooth"), "white")
     end
 
 
     -- Player list
-    local playerList = vgui.Create("DScrollPanel", main)
+    playerList = vgui.Create("DScrollPanel", main)
     playerList:SetPos(100, 300)
     playerList:SetSize(550, 500)
+    playerList:SetZPos(10)
     playerList.Paint = function(s, w, h)
         ZLDraw.OutlineBox(0, 0, w, h, "pink", 4)
     end
-
-    for k,v in ipairs(player.GetAll()) do
-        local plyBox = playerList:Add("DPanel")
-        plyBox:SetHeight(50)
-        plyBox:Dock(TOP)
-	    plyBox:DockMargin(9, 0, 5, 5)
-        plyBox.Paint = function(s, w, h)
-            ZLDraw.OutlineBox(0, 0, w, h, "pink", 1)
-        end
+    local scrollBar = playerList:GetVBar()
+    scrollBar:SetPos(playerList:GetWide() - 4, 0)
+    scrollBar:SetSize(4, 500)
+    function scrollBar:Paint(w, h)
+        ZLDraw.Box(0, 0, w, h, "gray")
     end
+    function scrollBar.btnUp:Paint(w, h)
+        ZLDraw.Box(0, 0, w, h, "pink")
+    end
+    function scrollBar.btnDown:Paint(w, h)
+        ZLDraw.Box(0, 0, w, h, "pink")
+    end
+    function scrollBar.btnGrip:Paint(w, h)
+        ZLDraw.Box(0, 0, w, h, "pink")
+    end
+    ReloadPlayerList()
 
     -- Player info
     local model = vgui.Create("DModelPanel", main)
@@ -80,13 +109,6 @@ hook.Add("Menu", "GameMenuStatusHook", function()
     desc:SetTextColor(ZLDraw.SetColor("white"))
     desc:SetWrap(true)
 
-    local highestScore = vgui.Create("DLabel", game)
-    highestScore:SetPos(25, 400)
-    highestScore:SetSize(500, 100)
-    highestScore:SetText("Highest score, highest run reached : "..ZL.HighestScore)
-    highestScore:SetFont("ZL28")
-    highestScore:SetTextColor(ZLDraw.SetColor("white"))
-
 
     -- Button
     local startBtn = vgui.Create("DButton", main)
@@ -96,11 +118,17 @@ hook.Add("Menu", "GameMenuStatusHook", function()
     startBtn:SetTextColor(ZLDraw.SetColor("white"))
     startBtn:SetFont("ZL50")
     startBtn.Paint = function(s, w, h)
-        ZLDraw.RoundedBox(20, 0, 0, w, h, "green")
+        if LocalPlayer() == player.GetAll()[1] then
+            ZLDraw.RoundedBox(20, 0, 0, w, h, "green")
+        else
+            ZLDraw.RoundedBox(20, 0, 0, w, h, Color(169, 169, 169, 255))
+        end
     end
-    startBtn.DoClick = function()
-        ZL.GoInPlay()
-        main:Remove()
+    if LocalPlayer() == player.GetAll()[1] then
+        startBtn.DoClick = function()
+            ZL.GoInPlay()
+            main:Remove()
+        end
     end
 
     local BuildBtn = vgui.Create("DButton", main)
@@ -110,6 +138,10 @@ hook.Add("Menu", "GameMenuStatusHook", function()
     BuildBtn:SetTextColor(ZLDraw.SetColor("white"))
     BuildBtn:SetFont("ZL50")
     BuildBtn.Paint = function(s, w, h)
-        ZLDraw.RoundedBox(20, 0, 0, w, h, "pink")
+        if LocalPlayer() == player.GetAll()[1] then
+            ZLDraw.RoundedBox(20, 0, 0, w, h, "pink")
+        else
+            ZLDraw.RoundedBox(20, 0, 0, w, h, Color(169, 169, 169, 255))
+        end
     end
 end)
