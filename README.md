@@ -45,13 +45,6 @@ Link to gamemode steam page : [ZombieLike]()
 - [ ] The host can start game
 - [ ] The host can go in build mode (For add props in world)
 
-### FinishSystem
-- _In waiting_
-- [ ] Show this if all players death or host stop game
-- [ ] Display the best player stats (three maximum), for the player who has the most ammo, who has killed the most zombies and who has sympathized with the enemy (who has killed the least zombies).
-- [ ] Go, with a wait, in the menu
-- [ ] If this is a new highest score save it
-
 ### ZombieManager
 - _In waiting_
 - [ ] Config file for zombies types and experiance get by zombie
@@ -59,6 +52,13 @@ Link to gamemode steam page : [ZombieLike]()
 - [ ] Spawn zombie randomly on maps (Defined place)
 - [ ] Creating infinite waves
 - [ ] Give point to player on kill zombie
+
+### FinishSystem
+- _In waiting_
+- [ ] Show this if all players death or host stop game
+- [ ] Display the best player stats (three maximum), for the player who has the most ammo, who has killed the most zombies and who has sympathized with the enemy (who has killed the least zombies).
+- [ ] Go, with a wait, in the menu
+- [ ] If this is a new highest score save it
 
 ### HudDraw
 - _In waiting_

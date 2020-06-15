@@ -38,35 +38,10 @@ function GM:PlayerConnect(name, ip)
     print(name.."/"..ip.." connected")
 end
 function GM:PlayerSpawn(ply)
-    PrintMessage(HUD_PRINTTALK, ply:Nick().." has spawned.")
+    PrintMessage(HUD_PRINTTALK, ply:GetName().." has spawned.")
 
     ply:SetModel("models/player/Group01/male_02.mdl")
-
-    local meta = FindMetaTable("Player")
-    ply:SetNWInt("ZombieKilled", 0)
-    ply:SetNWInt("Experiance", 0)
-    ply:SetNWInt("HighestExperiance", 0)
-
-    function meta:GetZombieKilled()
-        return self:GetNWInt("ZombieKilled")
-    end
-    function meta:GetExperiance()
-        return self:GetNWInt("Experiance")
-    end
-    function meta:GetHighestExperiance()
-        return self:GetNWInt("HighestExperiance")
-    end
-
-    function meta:AddZombieKilled(number)
-        return self:SetNWInt("ZombieKilled", self:GetNWInt("ZombieKilled") + number)
-    end
-    function meta:AddExperiance(number)
-        return self:SetNWInt("Experiance", self:GetNWInt("Experiance") + number)
-    end
-    function meta:SetHighestExperiance(number)
-        return self:SetNWInt("HighestExperiance", number)
-    end
 end
 function GM:PlayerDisconnected(ply)
-    PrintMessage(HUD_PRINTTALK, name.." left the game.")
+    PrintMessage(HUD_PRINTTALK, ply:GetName().." left the game.")
 end
