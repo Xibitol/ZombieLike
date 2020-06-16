@@ -32,6 +32,7 @@ include("modules/gamestatus/sv_gamestatus.lua")
 AddCSLuaFile("modules/zldraw/zl_draw.lua") -- Main draw module
 
 AddCSLuaFile("modules/menusystem/cl_menusystem.lua")
+include("modules/menusystem/sv_menusystem.lua")
 --------------------------
 function GM:PlayerConnect(name, ip)
 	PrintMessage(HUD_PRINTTALK, name.." connected to the game.")

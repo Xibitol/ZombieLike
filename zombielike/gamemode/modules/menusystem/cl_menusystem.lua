@@ -2,6 +2,8 @@ local main = nil
 local playerList = nil
 local playerHost = nil
 
+print(ScrW(), ScrH())
+
 function ReloadPlayerList()
     playerList:Clear()
 
@@ -75,7 +77,7 @@ hook.Add("Menu", "GameMenuStatusHook", function()
 
     -- Player list
     local playerListBox = vgui.Create("DPanel", main)
-    playerListBox:SetPos(100, 300)
+    playerListBox:SetPos(ScrW()*0.05, ScrH()*0.25)
     playerListBox:SetSize(550, 500)
     playerListBox.Paint = function(s, w, h)
         ZLDraw.OutlineBox(0, 0, w, h, "pink", 4)
@@ -101,7 +103,7 @@ hook.Add("Menu", "GameMenuStatusHook", function()
 
     -- Player info
     local model = vgui.Create("DModelPanel", main)
-    model:SetPos(ScrW()/2 - 450/2, 300)
+    model:SetPos(ScrW()/2 - 450/2, ScrH()*0.25)
     model:SetSize(450, 400)
     model:SetModel(LocalPlayer():GetModel())
     model:SetCamPos(Vector(75, 0, 50))
@@ -109,26 +111,29 @@ hook.Add("Menu", "GameMenuStatusHook", function()
     function model.Entity:GetPlayerColor() return ZLDraw.SetColor("white") end
 
     local name = vgui.Create("DLabel", main)
-    name:SetPos(ScrW()/2 - 250, 750)
+    name:SetPos(ScrW()/2 - 250, ScrH()*0.7)
     name:SetSize(200, 40)
     name:SetText(LocalPlayer():GetName())
     name:SetFont("ZL40")
     name:SetTextColor(ZLDraw.SetColor("white"))
 
     local modelColor = vgui.Create( "DColorPalette", main)
-    modelColor:SetPos(ScrW()/2, 750)
+    modelColor:SetPos(ScrW()/2, ScrH()*0.7)
     modelColor:SetSize(250, 50)
     modelColor:SetColor(Color(255, 255, 255))
     modelColor:SetButtonSize(15)
     modelColor.OnValueChanged = function(s, color)
-        local meta = FindMetaTable("Player")
-        function meta:GetPlayerColor() return Vector(color.r/255, color.g/255, color.b/255) end
+        net.Start("ChangePlayerColor")
+        net.WriteEntity(LocalPlayer())
+        net.WriteVector(Color(color.r, color.g, color.b):ToVector())
+        net.SendToServer()
+
         function model.Entity:GetPlayerColor() return LocalPlayer():GetPlayerColor() end
     end
 
     -- Description and Highest Score
     local game = vgui.Create("DPanel", main)
-    game:SetPos(ScrW() - 650, 300)
+    game:SetPos(ScrW() - ScrW()*0.05 - 550, ScrH()*0.25)
     game:SetSize(550, 500)
     game.Paint = function(s, w, h)
         ZLDraw.OutlineBox(0, 0, w, h, "green", 4)
@@ -145,7 +150,7 @@ hook.Add("Menu", "GameMenuStatusHook", function()
 
     -- Button
     local startBtn = vgui.Create("DButton", main)
-    startBtn:SetPos(ScrW()/2 - 600, ScrH() - 150)
+    startBtn:SetPos(ScrW()/2 - ScrW()*0.35, ScrH() - ScrH()*0.15)
     startBtn:SetSize(400, 100)
     startBtn:SetText("Start Game")
     startBtn:SetTextColor(ZLDraw.SetColor("white"))
@@ -165,7 +170,7 @@ hook.Add("Menu", "GameMenuStatusHook", function()
     end
 
     local BuildBtn = vgui.Create("DButton", main)
-    BuildBtn:SetPos(ScrW()/2 + 200, ScrH() - 150)
+    BuildBtn:SetPos(ScrW()/2 + ScrW()*0.1, ScrH() - ScrH()*0.15)
     BuildBtn:SetSize(400, 100)
     BuildBtn:SetText("Go in build mode")
     BuildBtn:SetTextColor(ZLDraw.SetColor("white"))
