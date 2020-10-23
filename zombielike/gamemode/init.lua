@@ -34,6 +34,9 @@ AddCSLuaFile("modules/zldraw/zl_draw.lua") -- Main draw module
 AddCSLuaFile("modules/menusystem/cl_menusystem.lua")
 include("modules/menusystem/sv_menusystem.lua")
 --------------------------
+util.AddNetworkString("PlayerSpawn")
+util.AddNetworkString("PlayerDisconnect")
+
 function GM:PlayerConnect(name, ip)
 	PrintMessage(HUD_PRINTTALK, name.." connected to the game.")
     print(name.."/"..ip.." connected")
@@ -42,7 +45,15 @@ function GM:PlayerSpawn(ply)
     PrintMessage(HUD_PRINTTALK, ply:GetName().." has spawned.")
 
     ply:SetModel("models/player/Group01/male_02.mdl")
+
+    net.Start("PlayerSpawn")
+    net.WriteEntity(ply)
+    net.Broadcast()
 end
 function GM:PlayerDisconnected(ply)
     PrintMessage(HUD_PRINTTALK, ply:GetName().." left the game.")
+
+    net.Start("PlayerDisconnect")
+    net.WriteEntity(ply)
+    net.Broadcast()
 end

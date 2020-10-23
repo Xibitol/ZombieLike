@@ -1,23 +1,20 @@
-local main = nil
-local playerList = nil
-local playerHost = nil
+function ReloadPlayerList(pl)
+    local pl = pl || playerList
+    if not IsValid(pl) then return end
+    pl:Clear()
+    print(pl)
 
-print(ScrW(), ScrH())
-
-function ReloadPlayerList()
-    playerList:Clear()
-
-    local top = playerList:Add("DPanel")
+    local top = pl:Add("DPanel")
     top:SetHeight(9)
     top:Dock(TOP)
     top.Paint = function(s, w, h)
     end
 
     for k,v in ipairs(player.GetAll()) do
-        local plyBox = playerList:Add("DPanel")
+        local plyBox = pl:Add("DPanel")
         plyBox:SetHeight(50)
         plyBox:Dock(TOP)
-	    plyBox:DockMargin(9, 0, 5, 5)
+	    plyBox:DockMargin(9, 0, 9, 5)
         plyBox.Paint = function(s, w, h)
             ZLDraw.OutlineBox(0, 0, w, h, "pink", 1)
         end
@@ -44,7 +41,7 @@ function ReloadPlayerList()
         end
     end
 
-    local bottom = playerList:Add("DPanel")
+    local bottom = pl:Add("DPanel")
     bottom:SetHeight(4)
     bottom:Dock(TOP)
     bottom.Paint = function(s, w, h)
@@ -76,20 +73,18 @@ hook.Add("Menu", "GameMenuStatusHook", function()
 
 
     -- Player list
-    local playerListBox = vgui.Create("DPanel", main)
-    playerListBox:SetPos(ScrW()*0.05, ScrH()*0.25)
-    playerListBox:SetSize(550, 500)
-    playerListBox.Paint = function(s, w, h)
+    playerList = vgui.Create("DScrollPanel", main)
+    playerList:SetPos(ScrW()*0.05, ScrH()*0.25)
+    playerList:SetSize(450, 500)
+    playerList.Paint = function(s, w, h)
         ZLDraw.OutlineBox(0, 0, w, h, "pink", 4)
     end
-    playerList = vgui.Create("DScrollPanel", playerListBox)
-    playerList:Dock(FILL)
     local scrollBar = playerList:GetVBar()
     scrollBar:SetPos(playerList:GetWide() - 4, 0)
     scrollBar:SetSize(4, 500)
     function scrollBar:Paint(w, h)
         ZLDraw.Box(0, 0, w, h, "gray")
-    end
+    end 
     function scrollBar.btnUp:Paint(w, h)
         ZLDraw.Box(0, 0, w, h, "pink")
     end
@@ -99,7 +94,7 @@ hook.Add("Menu", "GameMenuStatusHook", function()
     function scrollBar.btnGrip:Paint(w, h)
         ZLDraw.Box(0, 0, w, h, "pink")
     end
-    ReloadPlayerList()
+    ReloadPlayerList(playerList)
 
     -- Player info
     local model = vgui.Create("DModelPanel", main)
@@ -111,15 +106,15 @@ hook.Add("Menu", "GameMenuStatusHook", function()
     function model.Entity:GetPlayerColor() return ZLDraw.SetColor("white") end
 
     local name = vgui.Create("DLabel", main)
-    name:SetPos(ScrW()/2 - 250, ScrH()*0.7)
-    name:SetSize(200, 40)
+    name:SetPos(ScrW()/2 - model:GetWide()/2, ScrH()*0.7)
+    name:SetSize(model:GetWide()/2-50, 40)
     name:SetText(LocalPlayer():GetName())
     name:SetFont("ZL40")
     name:SetTextColor(ZLDraw.SetColor("white"))
 
     local modelColor = vgui.Create( "DColorPalette", main)
     modelColor:SetPos(ScrW()/2, ScrH()*0.7)
-    modelColor:SetSize(250, 50)
+    modelColor:SetSize(model:GetWide()/2, 50)
     modelColor:SetColor(Color(255, 255, 255))
     modelColor:SetButtonSize(15)
     modelColor.OnValueChanged = function(s, color)
@@ -133,15 +128,15 @@ hook.Add("Menu", "GameMenuStatusHook", function()
 
     -- Description and Highest Score
     local game = vgui.Create("DPanel", main)
-    game:SetPos(ScrW() - ScrW()*0.05 - 550, ScrH()*0.25)
-    game:SetSize(550, 500)
+    game:SetPos(ScrW() - ScrW()*0.05 - 450, ScrH()*0.25)
+    game:SetSize(450, 500)
     game.Paint = function(s, w, h)
         ZLDraw.OutlineBox(0, 0, w, h, "green", 4)
     end
 
     local desc = vgui.Create("DLabel", game)
     desc:SetPos(25, 25)
-    desc:SetSize(500, 100)
+    desc:SetSize(400, 150)
     desc:SetText(ZL.Description)
     desc:SetFont("ZL28")
     desc:SetTextColor(ZLDraw.SetColor("white"))
@@ -184,14 +179,12 @@ hook.Add("Menu", "GameMenuStatusHook", function()
     end
 end)
 
-net.Receive("PlayerSpawnMS", function()
+net.Receive("PlayerSpawn", function()
     ReloadPlayerList()
 end)
 
-net.Receive("PlayerDisconnectMS", function()
-    local ply = net.ReadEntity()
-
-    if ply == playerHost then
+net.Receive("PlayerDisconnect", function()
+    if net.ReadEntity() == playerHost then
         playerHost = player.GetAll()[1]
         print("New host is "..player.GetAll()[1]:GetName())
     end

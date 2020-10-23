@@ -19,7 +19,7 @@ Link to gamemode steam page : [ZombieLike]()
 
 ### GameStatus (_MainModule_)
 - In progress
-- [x] Change the status and send call hook ("Menu","Play","WaveTransition","Build")
+- [ ] Change the status and send call hook ("Menu","Play","WaveTransition","Build")
 - [ ] On Playing, give initial weapon ("fas2_machete", "fas2_p226")
 - [ ] On Build, give physgun
 - [x] Call think hook ("MenuThink","PlayingThink","WaveTransitionThink","BuildThink")
@@ -40,8 +40,8 @@ Link to gamemode steam page : [ZombieLike]()
 - In progress
 - [ ] Select the host player (Change the host if he disconnect)
 - [ ] List of player with a tag for host
-- [x] Can choose player's model and model color
-- [x] Display the game description and the highest score
+- [ ] Can choose player's model (list in config file) and model color
+- [ ] Display the game description and the highest score
 - [ ] The host can start game
 - [ ] The host can go in build mode (For add props in world)
 
