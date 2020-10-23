@@ -7,7 +7,7 @@ ZL.GameStatus = nil
 ]]
 
 util.AddNetworkString("UpdateGSServer")
-util.AddNetworkString("UpdateGSAllClient")
+util.AddNetworkString("UpdateGSClient")
 
 function ZL.GoInMenu()
     ZL.GameStatus = 0
@@ -43,12 +43,18 @@ function ZL.GoInBuild()
 end
 
 function ZL.UpdateGSAllClient(status)
-    net.Start("UpdateGSAllClient")
+    net.Start("UpdateGSClient")
     net.WriteInt(status, 3)
     net.Broadcast()
 end
+function ZL.UpdateGSOneClient(status, ply)
+    net.Start("UpdateGSClient")
+    net.WriteInt(status, 3)
+    net.Send(ply)
+end
 net.Receive("UpdateGSServer", function()
     ZL.GameStatus = net.ReadInt(3)
+    ZL.UpdateGSAllClient(ZL.GameStatus)
 
     if ZL.GameStatus == 0 then
         hook.Run("Menu")

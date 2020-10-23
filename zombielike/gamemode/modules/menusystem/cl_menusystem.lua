@@ -2,7 +2,6 @@ function ReloadPlayerList(pl)
     local pl = pl || playerList
     if not IsValid(pl) then return end
     pl:Clear()
-    print(pl)
 
     local top = pl:Add("DPanel")
     top:SetHeight(9)
@@ -15,26 +14,29 @@ function ReloadPlayerList(pl)
         plyBox:SetHeight(50)
         plyBox:Dock(TOP)
 	    plyBox:DockMargin(9, 0, 9, 5)
+        plyBox:DockPadding(3, 3, 3, 3)
         plyBox.Paint = function(s, w, h)
             ZLDraw.OutlineBox(0, 0, w, h, "pink", 1)
         end
 
         local plyAvatar = vgui.Create("AvatarImage", plyBox)
-        plyAvatar:SetPos(3, 3)
-        plyAvatar:SetSize(44, 44)
-        plyAvatar:SetPlayer(v, 44)
+        plyAvatar:Dock(LEFT)
+        plyAvatar:SetSize(plyBox:GetTall()-6, plyBox:GetTall()-6)
+        plyAvatar:SetPlayer(v, plyBox:GetTall()-6)
 
         local plyName = vgui.Create("DLabel", plyBox)
-        plyName:SetPos(57, 3)
-        plyName:SetSize(200, 44)
+        plyName:Dock(LEFT)
+        plyName:SetSize(200, plyBox:GetTall()-6)
+        plyName:DockMargin(5, 0, 0, 0)
         plyName:SetText(v:GetName())
         plyName:SetFont("ZL28")
         plyName:SetTextColor(ZLDraw.SetColor("white"))
 
         if v == playerHost then
             local plyHostTag = vgui.Create("DPanel", plyBox)
-            plyHostTag:SetPos(495, 7.5)
-            plyHostTag:SetSize(35, 35)
+            plyHostTag:Dock(RIGHT)
+            plyHostTag:DockMargin(4.5, 4.5, 4.5, 4.5)
+            plyHostTag:SetSize(plyBox:GetTall()-6-9, plyBox:GetTall()-6-9)
             plyHostTag.Paint = function(s, h, w)
                 ZLDraw.Image(0, 0, w, h, Material("stars.png", "smooth mips"), Color(255, 220, 0))
             end
@@ -48,7 +50,7 @@ function ReloadPlayerList(pl)
     end
 end
 
-hook.Add("Menu", "GameMenuStatusHook", function()
+hook.Add("Menu", "MenuSystem_HookMenu", function()
     playerHost = player.GetAll()[1]
     print("The host is "..playerHost:GetName())
 
@@ -62,13 +64,15 @@ hook.Add("Menu", "GameMenuStatusHook", function()
     main:ShowCloseButton(true)
     main:MakePopup()
     main.Paint = function(s, w, h)
-        ZLDraw.Box(0, 0, w, h, Color(51, 51, 51))
+        ZLDraw.Box(0, 0, w, h, "gray")
 
         --[[ZLDraw.Texts(w / 2, 40, TEXT_ALIGN_CENTER, TEXT_ALIGN_TOP, {
             {text = "Zombie", color = "green", font = "ZL200"},
             {text = "Like", color = "pink", font = "ZL200"}
         })]]
-        ZLDraw.Image(w/2 - 576/2, 20, 576, 256, Material("logo2x.png", "alphatest"), "white")
+        data = ScrH()*0.25/26
+        imageW, imageH = data*24*2.25, data*24
+        ZLDraw.Image(w/2 - imageW/2, data, imageW, imageH, Material("logo2x.png", "smooth mips"), "white")
     end
 
 
@@ -106,14 +110,14 @@ hook.Add("Menu", "GameMenuStatusHook", function()
     function model.Entity:GetPlayerColor() return ZLDraw.SetColor("white") end
 
     local name = vgui.Create("DLabel", main)
-    name:SetPos(ScrW()/2 - model:GetWide()/2, ScrH()*0.7)
-    name:SetSize(model:GetWide()/2-50, 40)
+    name:SetPos(ScrW()/2 - model:GetWide()/2, ScrH()*0.25 + model:GetTall() + 25)
+    name:SetSize(model:GetWide()/2-50, 50)
     name:SetText(LocalPlayer():GetName())
     name:SetFont("ZL40")
     name:SetTextColor(ZLDraw.SetColor("white"))
 
     local modelColor = vgui.Create( "DColorPalette", main)
-    modelColor:SetPos(ScrW()/2, ScrH()*0.7)
+    modelColor:SetPos(ScrW()/2, ScrH()*0.25 + model:GetTall() + 25)
     modelColor:SetSize(model:GetWide()/2, 50)
     modelColor:SetColor(Color(255, 255, 255))
     modelColor:SetButtonSize(15)
@@ -160,7 +164,6 @@ hook.Add("Menu", "GameMenuStatusHook", function()
     if LocalPlayer() == playerHost then
         startBtn.DoClick = function()
             ZL.GoInPlay()
-            main:Remove()
         end
     end
 
@@ -178,11 +181,9 @@ hook.Add("Menu", "GameMenuStatusHook", function()
         end
     end
 end)
-
 net.Receive("PlayerSpawn", function()
     ReloadPlayerList()
 end)
-
 net.Receive("PlayerDisconnect", function()
     if net.ReadEntity() == playerHost then
         playerHost = player.GetAll()[1]
@@ -190,4 +191,8 @@ net.Receive("PlayerDisconnect", function()
     end
 
     ReloadPlayerList()
+end)
+
+hook.Add("Play", "MenuSystem_HookPlay", function()
+    main:Remove()
 end)

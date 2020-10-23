@@ -1,4 +1,4 @@
-![ZombieLike logo with text](https://github.com/Xibitol/ZombieLike/blob/master/logo.png?raw=true)
+![ZombieLike logo with text](https://github.com/Xibitol/ZombieLike/blob/master/Logo/logo.png?raw=true)
 
 # ZombieLike
 It's a game mode from Garry's Mod. The objective is to kill zombies by infinite waves and with the points you earn you can buy weapons, give yourself care, add armor...
@@ -15,15 +15,6 @@ Link to gamemode steam page : [ZombieLike]()
 - [x] Check if all "FA:S 2.0 Alpha SWEPs" addons and "Map for ZombieLike" addon is installed (on serveur or on client make game), otherwise it not start all script
 - [x] Send a message when the player connects and spawn
 - [x] Set player model
-- [x] Set player network variable ("ZombieKilled","Experiance","HighestExperiance")
-
-### GameStatus (_MainModule_)
-- In progress
-- [ ] Change the status and send call hook ("Menu","Play","WaveTransition","Build")
-- [ ] On Playing, give initial weapon ("fas2_machete", "fas2_p226")
-- [ ] On Build, give physgun
-- [x] Call think hook ("MenuThink","PlayingThink","WaveTransitionThink","BuildThink")
-- [x] Update Client or Server side
 
 ### ZLDraw (_MainDrawModule_)
 - **Finished**
@@ -36,13 +27,26 @@ Link to gamemode steam page : [ZombieLike]()
 - [x] Function for draw multiple text with different color and font in one line
 - [x] Function for get text size by selecting font
 
+### GameStatus (_MainModule_)
+- In progress
+- [x] Change the status and send call hook ("Menu","Play","WaveTransition","Build")
+- [ ] On Playing, give initial weapon ("fas2_machete", "fas2_p226")
+- [ ] On Build, give physgun
+- [x] Call think hook ("MenuThink","PlayingThink","WaveTransitionThink","BuildThink")
+- [x] Update Client or Server side
+
+### GameData (_MainDataModule_)
+- In progress
+- [ ] Save wave count, remaining zombies
+- [ ] Set player network variable ("ZombieKilled","Experiance","HighestExperiance")
+
 ### MenuSystem
 - In progress
-- [ ] Select the host player (Change the host if he disconnect)
-- [ ] List of player with a tag for host
+- [x] Select the host player (Change the host if he disconnect)
+- [x] List of player with a tag for host
 - [ ] Can choose player's model (list in config file) and model color
-- [ ] Display the game description and the highest score
-- [ ] The host can start game
+- [x] Display the game description
+- [x] The host can start game
 - [ ] The host can go in build mode (For add props in world)
 
 ### ZombieManager
@@ -60,7 +64,7 @@ Link to gamemode steam page : [ZombieLike]()
 - [ ] Go, with a wait, in the menu
 - [ ] If this is a new highest score save it
 
-### HudDraw
+### Hud
 - _In waiting_
 - [ ] Draw a hud (Name, Model, Health, Battery, ZombieKilled and Experiance)
 - [ ] Draw the player's health and name on the top of his head.
@@ -82,7 +86,7 @@ Link to gamemode steam page : [ZombieLike]()
 - [ ] Spawn, in config file, preselected prop
 - [ ] The host can return in menu
 
-### ScoreBoardDraw
+### ScoreBoard
 - _In waiting_
 - [ ] Draw a Scoreboard
 - [ ] Look players stats (Health, Battery, ZombieKilled, Experiance and HighestExperiance)

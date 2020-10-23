@@ -9,7 +9,9 @@ ZLDraw.LoadFont()
 include("modules/menusystem/cl_menusystem.lua")
 --------------------------
 function GM:InitPostEntity()
-    ZL.GoInMenu()
+    net.Start("InitPostPlayer")
+    net.WriteEntity(LocalPlayer())
+    net.SendToServer()
 end
 
 local meta = FindMetaTable("Player")

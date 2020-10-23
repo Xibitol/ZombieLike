@@ -35,7 +35,10 @@ AddCSLuaFile("modules/menusystem/cl_menusystem.lua")
 include("modules/menusystem/sv_menusystem.lua")
 --------------------------
 util.AddNetworkString("PlayerSpawn")
+util.AddNetworkString("InitPostPlayer")
 util.AddNetworkString("PlayerDisconnect")
+
+ZL.GoInMenu()
 
 function GM:PlayerConnect(name, ip)
 	PrintMessage(HUD_PRINTTALK, name.." connected to the game.")
@@ -50,6 +53,9 @@ function GM:PlayerSpawn(ply)
     net.WriteEntity(ply)
     net.Broadcast()
 end
+net.Receive("InitPostPlayer", function()
+    ZL.UpdateGSOneClient(ZL.GameStatus, net.ReadEntity())
+end)
 function GM:PlayerDisconnected(ply)
     PrintMessage(HUD_PRINTTALK, ply:GetName().." left the game.")
 

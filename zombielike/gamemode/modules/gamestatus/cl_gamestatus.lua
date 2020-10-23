@@ -12,7 +12,7 @@ function ZL.GoInMenu()
 
     ZL.UpdateGSServer(ZL.GameStatus)
 
-    print("Game status changed in "..ZL.GameStatus)
+    print("Game status changed in "..ZL.GameStatus.." -- Client has changed mode")
 end
 function ZL.GoInPlay()
     ZL.GameStatus = 1
@@ -20,7 +20,7 @@ function ZL.GoInPlay()
 
     ZL.UpdateGSServer(ZL.GameStatus)
 
-    print("Game status changed in "..ZL.GameStatus)
+    print("Game status changed in "..ZL.GameStatus.." -- Client has changed mode")
 end
 function ZL.GoInWaveTransition()
     ZL.GameStatus = 2
@@ -28,7 +28,7 @@ function ZL.GoInWaveTransition()
 
     ZL.UpdateGSServer(ZL.GameStatus)
 
-    print("Game status changed in "..ZL.GameStatus)
+    print("Game status changed in "..ZL.GameStatus.." -- Client has changed mode")
 end
 function ZL.GoInBuild()
     ZL.GameStatus = 3
@@ -36,7 +36,7 @@ function ZL.GoInBuild()
     
     ZL.UpdateGSServer(ZL.GameStatus)
 
-    print("Game status changed in "..ZL.GameStatus)
+    print("Game status changed in "..ZL.GameStatus.." -- Client has changed mode")
 end
 
 function ZL.UpdateGSServer(status)
@@ -44,8 +44,9 @@ function ZL.UpdateGSServer(status)
     net.WriteInt(status, 3)
     net.SendToServer()
 end
-net.Receive("UpdateGSAllClient", function()
+net.Receive("UpdateGSClient", function()
     ZL.GameStatus = net.ReadInt(3)
+    print("Game status changed in "..ZL.GameStatus.." -- Server has changed game status in this client")
 
     if ZL.GameStatus == 0 then
         hook.Run("Menu")
