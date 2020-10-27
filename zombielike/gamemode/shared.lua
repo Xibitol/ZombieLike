@@ -1,5 +1,10 @@
 module("ZL", package.seeall)
 
+include("config/playerConfig.lua")
+if SERVER then
+    AddCSLuaFile("config/playerConfig.lua")
+end
+
 GM.Name = "ZombieLike"
 GM.Author = "Xibitol"
 GM.Email = "xibitol-contact@pimous.fr"

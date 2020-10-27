@@ -97,11 +97,14 @@ end
 
 ----- Draw image function -----
 function Image(x, y, w, h, material, color)
+    ImageRotated(x, y, w, h, 0, material, color)
+end
+function ImageRotated(x, y, w, h, r, material, color)
     color = SetColor(color)
 
     surface.SetDrawColor(color.r, color.g, color.b, color.a)
     surface.SetMaterial(material)
-    surface.DrawTexturedRect(x, y, w, h)
+    surface.DrawTexturedRectRotated(x+w/2, y+h/2, w, h, r)
 end
 
 ----- Draw text function -----

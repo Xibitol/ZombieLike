@@ -1,4 +1,5 @@
-allowedModel = {
+ZL.allowedModel = {
+    base = "models/player/Group01/male_02.mdl",
     models = {
         ---- Female model ----
         --[["models/player/Group01/female_01.mdl",
@@ -40,5 +41,5 @@ allowedModel = {
         "models/player/Group03/male_08.mdl",
         "models/player/Group03/male_09.mdl"
     },
-    base = "models/player/Group01/male_02.mdl"
+    currentIndex = 1
 }

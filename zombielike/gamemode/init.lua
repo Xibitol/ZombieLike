@@ -32,6 +32,7 @@ include("modules/gamestatus/sv_gamestatus.lua")
 AddCSLuaFile("modules/zldraw/zl_draw.lua") -- Main draw module
 
 AddCSLuaFile("modules/menusystem/cl_menusystem.lua")
+AddCSLuaFile("modules/menusystem/cl_modelPanel.lua")
 include("modules/menusystem/sv_menusystem.lua")
 --------------------------
 util.AddNetworkString("PlayerSpawn")
@@ -47,7 +48,7 @@ end
 function GM:PlayerSpawn(ply)
     PrintMessage(HUD_PRINTTALK, ply:GetName().." has spawned.")
 
-    ply:SetModel("models/player/Group01/male_02.mdl")
+    ply:SetModel(ZL.allowedModel.models[ZL.allowedModel.currentIndex])
 
     net.Start("PlayerSpawn")
     net.WriteEntity(ply)

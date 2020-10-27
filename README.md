@@ -30,10 +30,10 @@ Link to gamemode steam page : [ZombieLike]()
 ### GameStatus (_MainModule_)
 - In progress
 - [x] Change the status and send call hook ("Menu","Play","WaveTransition","Build")
-- [ ] On Playing, give initial weapon ("fas2_machete", "fas2_p226")
+- [ ] On Playing, give initial weapon ("fas2_machete", "fas2_p226") (OnStart and OnStartMunition in weapons F4 menu in config file)
 - [ ] On Build, give physgun
 - [x] Call think hook ("MenuThink","PlayingThink","WaveTransitionThink","BuildThink")
-- [x] Update Client or Server side
+- [x] Update Client and Server
 
 ### GameData (_MainDataModule_)
 - In progress
@@ -44,7 +44,7 @@ Link to gamemode steam page : [ZombieLike]()
 - In progress
 - [x] Select the host player (Change the host if he disconnect)
 - [x] List of player with a tag for host
-- [ ] Can choose player's model (list in config file) and model color
+- [x] Can choose player's model (list in config file) and model color
 - [x] Display the game description
 - [x] The host can start game
 - [ ] The host can go in build mode (For add props in world)
@@ -57,16 +57,9 @@ Link to gamemode steam page : [ZombieLike]()
 - [ ] Creating infinite waves
 - [ ] Give point to player on kill zombie
 
-### FinishSystem
-- _In waiting_
-- [ ] Show this if all players death or host stop game
-- [ ] Display the best player stats (three maximum), for the player who has the most ammo, who has killed the most zombies and who has sympathized with the enemy (who has killed the least zombies).
-- [ ] Go, with a wait, in the menu
-- [ ] If this is a new highest score save it
-
 ### Hud
 - _In waiting_
-- [ ] Draw a hud (Name, Model, Health, Battery, ZombieKilled and Experiance)
+- [ ] Draw a hud (Health, Battery)
 - [ ] Draw the player's health and name on the top of his head.
 - [ ] Draw wave number and number of zombie alive
 
@@ -74,10 +67,18 @@ Link to gamemode steam page : [ZombieLike]()
 - _In waiting_
 - [ ] Draw a F4Menu
 - [ ] Can open if the game status is "WaveTransition"
-- [ ] Config file for diplay, name and price of weapons, munitions, armor and medic kit
-- [ ] Buy weapons, munitions and armor
-- [ ] Buy a medic kit for 1 usagess
+- [ ] Easy creating tab in menu
+#### Dashboard
+- [ ] Draw a hud (Name, Model, Health, Battery, ZombieKilled and Experiance)
 - [ ] The host can stop the game
+#### Weapons
+- [ ] Config file for element (Name, Price, Entity)
+- [ ] Buy weapon (onBuyMunition)
+- [ ] Buy Munititon on every weapon (Number)
+#### Other
+- [ ] Config file for element (Name, Price, Entity or Value)
+- [ ] Buy armor (Value to give : 35)
+- [ ] Buy a medic kit ("fas2_ifak")
 
 ### F1Menu
 - _In waiting_
@@ -91,6 +92,13 @@ Link to gamemode steam page : [ZombieLike]()
 - [ ] Draw a Scoreboard
 - [ ] Look players stats (Health, Battery, ZombieKilled, Experiance and HighestExperiance)
 - [ ] For host : kick player, remove all weapons except the starting, clear experiance
+
+### FinishSystem
+- _In waiting_
+- [ ] Show this if all players death or host stop game
+- [ ] Display the best player stats (three maximum), for the player who has the most ammo, who has killed the most zombies and who has sympathized with the enemy (who has killed the least zombies).
+- [ ] Go, with a wait, in the menu
+- [ ] If this is a new highest score save it
 
 ## Developpers
 > Xibitol

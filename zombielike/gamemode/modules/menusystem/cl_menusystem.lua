@@ -101,13 +101,9 @@ hook.Add("Menu", "MenuSystem_HookMenu", function()
     ReloadPlayerList(playerList)
 
     -- Player info
-    local model = vgui.Create("DModelPanel", main)
+    local model = vgui.Create("DModelAnimated", main)
     model:SetPos(ScrW()/2 - 450/2, ScrH()*0.25)
     model:SetSize(450, 400)
-    model:SetModel(LocalPlayer():GetModel())
-    model:SetCamPos(Vector(75, 0, 50))
-    function model:LayoutEntity(entity)end
-    function model.Entity:GetPlayerColor() return ZLDraw.SetColor("white") end
 
     local name = vgui.Create("DLabel", main)
     name:SetPos(ScrW()/2 - model:GetWide()/2, ScrH()*0.25 + model:GetTall() + 25)
@@ -127,7 +123,7 @@ hook.Add("Menu", "MenuSystem_HookMenu", function()
         net.WriteVector(Color(color.r, color.g, color.b):ToVector())
         net.SendToServer()
 
-        function model.Entity:GetPlayerColor() return LocalPlayer():GetPlayerColor() end
+        model:SetModelColor(color)
     end
 
     -- Description and Highest Score
@@ -154,31 +150,35 @@ hook.Add("Menu", "MenuSystem_HookMenu", function()
     startBtn:SetText("Start Game")
     startBtn:SetTextColor(ZLDraw.SetColor("white"))
     startBtn:SetFont("ZL50")
-    startBtn.Paint = function(s, w, h)
-        if LocalPlayer() == playerHost then
-            ZLDraw.RoundedBox(20, 0, 0, w, h, "green")
-        else
-            ZLDraw.RoundedBox(20, 0, 0, w, h, Color(169, 169, 169, 255))
-        end
-    end
     if LocalPlayer() == playerHost then
+        startBtn.Paint = function(s, w, h)
+            ZLDraw.RoundedBox(20, 0, 0, w, h, "green")
+        end
         startBtn.DoClick = function()
             ZL.GoInPlay()
         end
-    end
-
-    local BuildBtn = vgui.Create("DButton", main)
-    BuildBtn:SetPos(ScrW()/2 + ScrW()*0.1, ScrH() - ScrH()*0.15)
-    BuildBtn:SetSize(400, 100)
-    BuildBtn:SetText("Go in build mode")
-    BuildBtn:SetTextColor(ZLDraw.SetColor("white"))
-    BuildBtn:SetFont("ZL50")
-    BuildBtn.Paint = function(s, w, h)
-        if LocalPlayer() == playerHost then
-            ZLDraw.RoundedBox(20, 0, 0, w, h, "pink")
-        else
+    else
+        startBtn.Paint = function(s, w, h)
             ZLDraw.RoundedBox(20, 0, 0, w, h, Color(169, 169, 169, 255))
         end
+        startBtn:SetCursor("no")
+    end
+
+    local buildBtn = vgui.Create("DButton", main)
+    buildBtn:SetPos(ScrW()/2 + ScrW()*0.1, ScrH() - ScrH()*0.15)
+    buildBtn:SetSize(400, 100)
+    buildBtn:SetText("Go in build mode")
+    buildBtn:SetTextColor(ZLDraw.SetColor("white"))
+    buildBtn:SetFont("ZL50")
+    if LocalPlayer() == playerHost then
+        buildBtn.Paint = function(s, w, h)
+            ZLDraw.RoundedBox(20, 0, 0, w, h, "pink")
+        end
+    else
+        buildBtn.Paint = function(s, w, h)
+            ZLDraw.RoundedBox(20, 0, 0, w, h, Color(169, 169, 169, 255))
+        end
+        buildBtn:SetCursor("no")
     end
 end)
 net.Receive("PlayerSpawn", function()
