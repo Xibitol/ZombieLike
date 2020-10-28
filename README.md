@@ -53,6 +53,7 @@ Link to gamemode steam page : [ZombieLike]()
 ### ZombieManager
 - **Finished**
 - [x] Config file for zombies (Name, Entity, Experiance, MinimalWave)
+- [x] Create wave's and remaining zombie's variable and update Client and Server
 - [x] Spawn zombie with a config file (Position, Raduis)
 - [x] Create waves infinites and spawn zombies in function him count and number of player connected (Wave 1 == Nombre de joueurs connectés pour le nombre de zombie)
 - [x] Give point to player on kill zombie

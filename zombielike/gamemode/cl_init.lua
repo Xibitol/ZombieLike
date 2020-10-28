@@ -8,6 +8,8 @@ ZLDraw.LoadFont()
 
 include("modules/menusystem/cl_modelPanel.lua")
 include("modules/menusystem/cl_menusystem.lua")
+
+include("modules/zombiemanager/cl_zombienetwork.lua")
 --------------------------
 function GM:InitPostEntity()
     net.Start("InitPostPlayer")

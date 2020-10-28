@@ -98,7 +98,7 @@ end)
 hook.Add("WaveTransition", "GameStatus_HookPlay_SV", function()
     timer.Simple(60, function()
         if ZL.GameStatus == 2 then
-            --ZL.GoInPlay()
+            ZL.GoInPlay()
         end
     end)
 end)
