@@ -50,7 +50,7 @@ function ReloadPlayerList(pl)
     end
 end
 
-hook.Add("Menu", "MenuSystem_HookMenu", function()
+hook.Add("Menu", "MenuSystem_HookMenu_CL", function()
     playerHost = player.GetAll()[1]
     print("The host is "..playerHost:GetName())
 
@@ -193,6 +193,6 @@ net.Receive("PlayerDisconnect", function()
     ReloadPlayerList()
 end)
 
-hook.Add("Play", "MenuSystem_HookPlay", function()
+hook.Add("Play", "MenuSystem_HookPlay_CL", function()
     main:Remove()
 end)

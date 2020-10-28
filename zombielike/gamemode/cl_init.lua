@@ -15,24 +15,15 @@ function GM:InitPostEntity()
     net.SendToServer()
 end
 
-local meta = FindMetaTable("Player")
+hook.Add("OnPlayerChat", "HelloCommand", function(ply, strText, bTeam, bDead) 
+        if !ply:IsPlayer() then return end
 
-function meta:GetZombieKilled()
-    return self:GetNWInt("ZombieKilled")
-end
-function meta:GetExperiance()
-    return self:GetNWInt("Experiance")
-end
-function meta:GetHighestExperiance()
-    return self:GetNWInt("HighestExperiance")
-end
+        strText = string.lower(strText)
 
-function meta:AddZombieKilled(number)
-    self:SetNWInt("ZombieKilled", self:GetNWInt("ZombieKilled") + number)
-end
-function meta:AddExperiance(number)
-    self:SetNWInt("Experiance", self:GetNWInt("Experiance") + number)
-end
-function meta:SetHighestExperiance(number)
-    self:SetNWInt("HighestExperiance", number)
-end
+        if strText == "/pos" then
+            chat.AddText(Color(39, 76, 216), "---- Position ----")
+            chat.AddText(Color(187, 16, 210), "XYZ :"..tostring(ply:GetPos()))
+            chat.AddText(Color(39, 76, 216), "------------------")
+            return true
+        end
+    end)

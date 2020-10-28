@@ -78,3 +78,27 @@ function GM:Think()
         hook.Run("BuildThink")
     end
 end
+
+hook.Add("Play", "GameStatus_HookPlay_SV", function()
+    for kP,vP in ipairs(player.GetAll()) do
+        vP:SetZombieKilled(0)
+        vP:SetExperience(0)
+        vP:SetHighestExperience(0)
+
+        for kW,vW in ipairs(ZL.weapons) do
+            if vW.onStart then
+                vP:Give(vW.entity, true)
+                if vW.charger then
+                    vP:GiveAmmo(vW.onStartCharger * vW.charger.ammo, vW.charger.name)
+                end
+            end
+        end
+    end
+end)
+hook.Add("WaveTransition", "GameStatus_HookPlay_SV", function()
+    timer.Simple(60, function()
+        if ZL.GameStatus == 2 then
+            --ZL.GoInPlay()
+        end
+    end)
+end)

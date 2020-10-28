@@ -34,6 +34,8 @@ AddCSLuaFile("modules/zldraw/zl_draw.lua") -- Main draw module
 AddCSLuaFile("modules/menusystem/cl_menusystem.lua")
 AddCSLuaFile("modules/menusystem/cl_modelPanel.lua")
 include("modules/menusystem/sv_menusystem.lua")
+
+include("modules/zombiemanager/sv_zombiemanager.lua")
 --------------------------
 util.AddNetworkString("PlayerSpawn")
 util.AddNetworkString("InitPostPlayer")
