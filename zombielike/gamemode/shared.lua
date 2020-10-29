@@ -5,10 +5,10 @@ local moduleFolder = GM.FolderName.."/gamemode/config/"
 local files, folders = file.Find(moduleFolder.."config_*.lua", "LUA")
 
 for k,v in ipairs(files) do
-    include(moduleFolder..v)
     if SERVER then
         AddCSLuaFile(moduleFolder..v)
     end
+    include(moduleFolder..v)
 end
 -------------------------------
 

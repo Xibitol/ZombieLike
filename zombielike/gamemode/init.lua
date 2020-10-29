@@ -43,6 +43,8 @@ for k,v in ipairs(folders) do
         AddCSLuaFile(moduleFolder..v.."/"..vF)
     end
 end
+
+AddCSLuaFile(GM.FolderName.."/gamemode/modules/".."zldraw/zl_draw.lua")
 --------------------------
 util.AddNetworkString("PlayerSpawn")
 util.AddNetworkString("InitPostPlayer")

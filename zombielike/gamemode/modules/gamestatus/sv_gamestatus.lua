@@ -80,6 +80,8 @@ function GM:Think()
 end
 
 hook.Add("Play", "GameStatus_HookPlay_SV", function()
+    if ZL.wave >= 2 then return end
+
     for kP,vP in ipairs(player.GetAll()) do
         vP:SetZombieKilled(0)
         vP:SetExperience(0)
@@ -96,7 +98,7 @@ hook.Add("Play", "GameStatus_HookPlay_SV", function()
     end
 end)
 hook.Add("WaveTransition", "GameStatus_HookPlay_SV", function()
-    timer.Simple(60, function()
+    timer.Simple(ZL.WAVE_TRANSITION_TIME, function()
         if ZL.GameStatus == 2 then
             ZL.GoInPlay()
         end

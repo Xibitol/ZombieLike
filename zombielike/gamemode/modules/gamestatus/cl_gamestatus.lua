@@ -8,7 +8,6 @@ ZL.GameStatus = nil
 
 function ZL.GoInMenu()
     ZL.GameStatus = 0
-    hook.Run("Menu")
 
     ZL.UpdateGSServer(ZL.GameStatus)
 
@@ -16,7 +15,6 @@ function ZL.GoInMenu()
 end
 function ZL.GoInPlay()
     ZL.GameStatus = 1
-    hook.Run("Play")
 
     ZL.UpdateGSServer(ZL.GameStatus)
 
@@ -24,7 +22,6 @@ function ZL.GoInPlay()
 end
 function ZL.GoInWaveTransition()
     ZL.GameStatus = 2
-    hook.Run("WaveTransition")
 
     ZL.UpdateGSServer(ZL.GameStatus)
 
@@ -32,7 +29,6 @@ function ZL.GoInWaveTransition()
 end
 function ZL.GoInBuild()
     ZL.GameStatus = 3
-    hook.Run("Build")
     
     ZL.UpdateGSServer(ZL.GameStatus)
 

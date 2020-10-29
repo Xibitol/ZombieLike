@@ -2,8 +2,9 @@ local surface = surface
 local draw = draw
 local ipairs = ipairs
 local Color = Color
+local print = print
 
-local fontLoaded = false
+fontLoaded = false
 module("ZLDraw")
 
 ----- Create font -----
@@ -108,6 +109,10 @@ function ImageRotated(x, y, w, h, r, material, color)
 end
 
 ----- Draw text function -----
+function GetTextSize(text, font)
+    surface.SetFont(font)
+    return surface.GetTextSize(text)
+end
 function Text(text, font, x, y, color, xalign, yalign)
     if fontLoaded == false then return end
 
@@ -140,8 +145,6 @@ end
     })
 ]]
 function Texts(x, y, xalign, yalign, texts)
-    if fontLoaded == false then return end
-
     xalign = xalign or TEXT_ALIGN_LEFT
 	yalign = yalign or TEXT_ALIGN_TOP
     local text = ""
@@ -172,8 +175,4 @@ function Texts(x, y, xalign, yalign, texts)
 
         x = x + GetTextSize(v.text, v.font)
     end
-end
-function GetTextSize(text, font)
-    surface.SetFont(font)
-    return surface.GetTextSize(text)
 end

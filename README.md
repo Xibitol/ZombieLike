@@ -60,9 +60,10 @@ Link to gamemode steam page : [ZombieLike]()
 
 ### Hud
 - _In waiting_
-- [ ] Draw a hud (Health, Battery)
+- [x] Draw a hud (Health, Battery)
 - [ ] Draw the player's health and name on the top of his head.
-- [ ] Draw wave number and number of zombie alive
+- [x] Draw wave number and number of zombie alive or Draw wave transition time left
+- [ ] Draw points winned after killing zombie on screen
 
 ### F4Menu
 - _In waiting_

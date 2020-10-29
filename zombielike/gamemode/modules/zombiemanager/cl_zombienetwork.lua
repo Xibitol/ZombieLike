@@ -4,12 +4,12 @@ ZL.remainingZombie = 0
 function ZL.SetWave(value)
     ZL.wave = value
 
-    ZL.UpdateZMAllClient(ZL.wave, ZL.remainingZombie)
+    ZL.UpdateZMServer(ZL.wave, ZL.remainingZombie)
 end
 function ZL.SetRemainingZombie(value)
     ZL.remainingZombie = value
 
-    ZL.UpdateZMAllClient(ZL.wave, ZL.remainingZombie)
+    ZL.UpdateZMServer(ZL.wave, ZL.remainingZombie)
 end
 
 function ZL.UpdateZMServer(w, rz)

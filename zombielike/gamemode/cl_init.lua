@@ -14,7 +14,7 @@ for k,v in ipairs(folders) do
     end
 end
 
-include(moduleFolder.."zldraw/zl_draw.lua")
+include(GM.FolderName.."/gamemode/modules/".."zldraw/zl_draw.lua")
 --------------------------
 ZLDraw.LoadFont()
 
@@ -25,14 +25,14 @@ function GM:InitPostEntity()
 end
 
 hook.Add("OnPlayerChat", "HelloCommand", function(ply, strText, bTeam, bDead) 
-        if !ply:IsPlayer() then return end
+    if !ply:IsPlayer() then return end
 
-        strText = string.lower(strText)
+    strText = string.lower(strText)
 
-        if strText == "/pos" then
-            chat.AddText(Color(39, 76, 216), "---- Position ----")
-            chat.AddText(Color(187, 16, 210), "XYZ :"..tostring(ply:GetPos()))
-            chat.AddText(Color(39, 76, 216), "------------------")
-            return true
-        end
-    end)
+    if strText == "/pos" then
+        chat.AddText(Color(39, 76, 216), "---- Position ----")
+        chat.AddText(Color(187, 16, 210), "XYZ :"..tostring(ply:GetPos()))
+        chat.AddText(Color(39, 76, 216), "------------------")
+        return true
+    end
+end)
