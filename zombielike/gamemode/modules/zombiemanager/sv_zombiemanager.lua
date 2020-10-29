@@ -1,7 +1,7 @@
 zombieList = {}
 
 hook.Add("Play", "ZombieManager_HookPlay_SV", function()
-    ZL.SetWave(ZL.wave + 1)
+    ZL.SetWave(ZL.wave + 5)
     ZL.SetRemainingZombie(math.floor(player.GetCount() * ZL.wave * 0.9))
 
     if ZL.wave == 1 then ZL.SetRemainingZombie(player.GetCount()) end
@@ -31,7 +31,7 @@ function GM:OnNPCKilled(npc, a, i)
     ZL.SetRemainingZombie(ZL.remainingZombie - 1)
 
     for k,v in ipairs(ZL.ZOMBIE) do
-        if npc:GetClass() == v.entity then
+        if npc:GetClass() == v.entity and a:GetClass() == "player" then
             a:SetExperience(a:GetExperience() + v.experience)
         end
     end
@@ -40,5 +40,13 @@ end
 hook.Add("PlayThink", "ZombieManager_HookPlay_SV", function()
     if timer.Exists("zombieSpawn") == false and table.getn(zombieList) == 0 then
         ZL.GoInWaveTransition()
+    end
+end)
+
+hook.Add("WaveTransition", "ZombieManager_HookWaveTransition_SV", function()
+    for k,v in ipairs(ents.GetAll()) do
+        if v:IsNPC() then
+            v:TakeDamage(999)
+        end
     end
 end)

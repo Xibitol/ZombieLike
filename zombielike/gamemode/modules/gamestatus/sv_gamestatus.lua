@@ -80,9 +80,8 @@ function GM:Think()
 end
 
 hook.Add("Play", "GameStatus_HookPlay_SV", function()
-    if ZL.wave >= 2 then return end
-
     for kP,vP in ipairs(player.GetAll()) do
+        if ZL.wave >= 1 then continue end
         vP:SetZombieKilled(0)
         vP:SetExperience(0)
         vP:SetHighestExperience(0)
@@ -93,6 +92,16 @@ hook.Add("Play", "GameStatus_HookPlay_SV", function()
                 if vW.charger then
                     vP:GiveAmmo(vW.onStartCharger * vW.charger.ammo, vW.charger.name)
                 end
+            end
+        end
+    end
+
+    for kN,vN in ipairs(ents.GetAll()) do
+        vN:RemoveAllDecals()
+
+        for kZ,vZ in ipairs(ZL.ZOMBIE) do
+            if vN:GetClass() == vZ.entity then
+                vN:Remove()
             end
         end
     end

@@ -4,6 +4,7 @@ Data = {
     zombie = 0
 }
 zombieNumber = 0
+zombieKilledMsg = {}
 
 local yPI, wPI, hPI = 15, 225, 23
 local yW, wW, hW = 50, 1200, 18
@@ -56,10 +57,16 @@ hook.Add("HUDPaint", "Hud_HookHud_CL", function()
     ZLDraw.RoundedBox(4, ScrW()/2-wW/2, yW, barFill, hW, barColor)
 
     ZLDraw.Text(textDown, "ZL28", ScrW()/2, yW + hW, "white", TEXT_ALIGN_CENTER)
+
+    -- Zombie points
+    for k,v in ipairs(zombieKilledMsg) do
+		ZLDraw.Text("+ "..v.value.."xp", "ZL10", v.pos.x, v.pos.y, Color( 255, 255, 255 ), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+    end
 end)
 hook.Add("HUDShouldDraw", "Hud_HookHudShouldDraw_CL", function(name)
 	if name == "CHudHealth" or name == "CHudBattery" then return false end
 end)
+
 hook.Add("Play", "Hud_HookPlay_CL", function()
     timer.Simple(0.1, function()
         zombieNumber = ZL.remainingZombie
@@ -68,4 +75,21 @@ end)
 hook.Add("WaveTransition", "Hud_HookWaveTransition_CL", function()
     timer.Create("WaveTransitionTimer", ZL.WAVE_TRANSITION_TIME, 1, function()
     end)
+end)
+
+net.Receive("OnNPCKilled_Hud", function()
+    local npc = net.ReadEntity()
+
+    for k,v in ipairs(ZL.ZOMBIE) do
+        if npc:GetClass() == v.entity then
+            local point = ent:GetPos() + ent:OBBCenter()*2
+            local point2D = point:ToScreen()
+
+            if not point2D.visible then return end
+
+            table.insert(zombieKilledMsg, {value = v.experience, pos = {x=point2D.x, y=point2D.y}, alpha = 255})
+        end
+    end
+
+    PrintTable(zombieKilledMsg)
 end)

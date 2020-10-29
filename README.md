@@ -31,7 +31,8 @@ Link to gamemode steam page : [ZombieLike]()
 ### GameStatus (_MainModule_)
 - _In waiting_
 - [x] Change the status and send call hook ("Menu","Play","WaveTransition","Build")
-- [x] On Playing, give initial weapon ("zl_hand", "fas2_machete", "fas2_p226") (OnStart and OnStartCharger in weapons F4 menu in config file)
+- [x] On Playing, initial weapon ("zl_hand", "fas2_machete", "fas2_p226") (OnStart and OnStartCharger in weapons F4 menu in config file)
+- [ ] On Playing (2), cleans decals and cleans zombie remain
 - [ ] On Build, give physgun and zl_hand
 - [x] On WaveTransition, wait 60 secondes and go in Play
 - [x] Call think hook ("MenuThink","PlayingThink","WaveTransitionThink","BuildThink")
