@@ -9,8 +9,8 @@ Link to gamemode steam page : [ZombieLike]()
 
 ## Modules
 ### Init files
-- In progress
-- [ ] Include all modules
+- **Finished**
+- [x] Include all modules automatically
 - [x] Create ZL module
 - [x] Check if all "FA:S 2.0 Alpha SWEPs" addons and "Map for ZombieLike" addon is installed (on serveur or on client make game), otherwise it not start all script
 - [x] Send a message when the player connects and spawn

@@ -1,15 +1,16 @@
 module("ZL", package.seeall)
 
-include("config/playerConfig.lua")
-include("config/weaponsConfig.lua")
-include("config/zombiesConfig.lua")
-include("modules/gamedata/sh_gamedata.lua")
-if SERVER then
-    AddCSLuaFile("config/playerConfig.lua")
-    AddCSLuaFile("config/weaponsConfig.lua")
-    AddCSLuaFile("config/zombiesConfig.lua")
-    AddCSLuaFile("modules/gamedata/sh_gamedata.lua")
+----- Include Config File -----
+local moduleFolder = GM.FolderName.."/gamemode/config/"
+local files, folders = file.Find(moduleFolder.."config_*.lua", "LUA")
+
+for k,v in ipairs(files) do
+    include(moduleFolder..v)
+    if SERVER then
+        AddCSLuaFile(moduleFolder..v)
+    end
 end
+-------------------------------
 
 GM.Name = "ZombieLike"
 GM.Author = "Xibitol"

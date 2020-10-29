@@ -1,16 +1,23 @@
 include( "shared.lua" )
 
 ----- Include Module -----
-include("modules/gamestatus/cl_gamestatus.lua") -- Main module
+local moduleFolder = GM.FolderName.."/gamemode/modules/"
+local files, folders = file.Find(moduleFolder.."*", "LUA")
 
-include("modules/zldraw/zl_draw.lua") -- Main draw module
+for k,v in ipairs(folders) do
+    for kF,vF in ipairs(file.Find(moduleFolder..v.."/sh_*.lua", "LUA")) do
+        include(moduleFolder..v.."/"..vF)
+    end
+
+    for kF,vF in ipairs(file.Find(moduleFolder..v.."/cl_*.lua", "LUA")) do
+        include(moduleFolder..v.."/"..vF)
+    end
+end
+
+include(moduleFolder.."zldraw/zl_draw.lua")
+--------------------------
 ZLDraw.LoadFont()
 
-include("modules/menusystem/cl_modelPanel.lua")
-include("modules/menusystem/cl_menusystem.lua")
-
-include("modules/zombiemanager/cl_zombienetwork.lua")
---------------------------
 function GM:InitPostEntity()
     net.Start("InitPostPlayer")
     net.WriteEntity(LocalPlayer())

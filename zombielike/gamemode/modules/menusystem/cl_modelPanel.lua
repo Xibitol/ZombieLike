@@ -49,7 +49,7 @@ function PANEL:Init()
         ZLDraw.Image(0, 0, w, h, Material("arrow.png", "smooth mips"), "white")
     end
     modelBack.DoClick = function()
-        ZL.allowedModel.currentIndex = ZL.allowedModel.currentIndex - 1
+        ZL.MODEL.currentIndex = ZL.MODEL.currentIndex - 1
         self:ChangeModel(self.RIGHT)
     end
 
@@ -62,7 +62,7 @@ function PANEL:Init()
         ZLDraw.ImageRotated(0, 0, w, h, 180, Material("arrow.png", "smooth mips"), "white")
     end
     modelForward.DoClick = function()
-        ZL.allowedModel.currentIndex = ZL.allowedModel.currentIndex + 1
+        ZL.MODEL.currentIndex = ZL.MODEL.currentIndex + 1
         self:ChangeModel(self.LEFT)
     end
 end
@@ -74,9 +74,9 @@ function PANEL:Reset(direction)
     newModel:SetAlpha(0)
 
     if direction == 1 then
-        model:SetModel(ZL.allowedModel.models[ZL.allowedModel.currentIndex - 1])
+        model:SetModel(ZL.MODEL.models[ZL.MODEL.currentIndex - 1])
     elseif direction == 2 then
-        model:SetModel(ZL.allowedModel.models[ZL.allowedModel.currentIndex + 1])
+        model:SetModel(ZL.MODEL.models[ZL.MODEL.currentIndex + 1])
     end
     function model.Entity:GetPlayerColor() return PANEL:GetModelColor() end
 
@@ -101,16 +101,16 @@ end
 function PANEL:ChangeModel(direction, changePlayerModel)
     self:Reset()
 
-    if ZL.allowedModel.currentIndex == 0 then ZL.allowedModel.currentIndex = table.getn(ZL.allowedModel.models)
-    elseif ZL.allowedModel.currentIndex == table.getn(ZL.allowedModel.models) + 1 then ZL.allowedModel.currentIndex = 1 end
+    if ZL.MODEL.currentIndex == 0 then ZL.MODEL.currentIndex = table.getn(ZL.MODEL.models)
+    elseif ZL.MODEL.currentIndex == table.getn(ZL.MODEL.models) + 1 then ZL.MODEL.currentIndex = 1 end
 
     net.Start("ChangePlayerModel")
     net.WriteEntity(LocalPlayer())
-    net.WriteString(ZL.allowedModel.models[ZL.allowedModel.currentIndex])
+    net.WriteString(ZL.MODEL.models[ZL.MODEL.currentIndex])
     net.SendToServer()
 
     -- Animation
-    newModel:SetModel(ZL.allowedModel.models[ZL.allowedModel.currentIndex])
+    newModel:SetModel(ZL.MODEL.models[ZL.MODEL.currentIndex])
     function newModel.Entity:GetPlayerColor() return PANEL:GetModelColor() end
 
     local xAdding, xStartPos
@@ -128,7 +128,7 @@ function PANEL:ChangeModel(direction, changePlayerModel)
     model:MoveTo(xAdding, 0, 0.7, 0, 0.25, function(table, panel)
         panel:SetPos(0, 0)
 
-        panel:SetModel(ZL.allowedModel.models[ZL.allowedModel.currentIndex])
+        panel:SetModel(ZL.MODEL.models[ZL.MODEL.currentIndex])
         function panel.Entity:GetPlayerColor() return PANEL:GetModelColor() end
     end)
     model:AlphaTo(0, 0.25, 0, function(table, panel)

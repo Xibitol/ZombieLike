@@ -21,6 +21,4 @@ end
 net.Receive("UpdateZMClient", function()
     ZL.wave = net.ReadInt(32)
     ZL.remainingZombie = net.ReadInt(32)
-
-    print(ZL.wave, ZL.remainingZombie)
 end)

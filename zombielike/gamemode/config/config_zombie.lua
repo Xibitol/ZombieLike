@@ -1,4 +1,4 @@
-ZL.zombies = {
+ZL.ZOMBIE = {
     { -- Zombie
         name = "Zombie",
         entity = "npc_zombie",
@@ -64,7 +64,7 @@ ZL.zombies = {
     }
 }
 
-ZL.spawnLocation = {
+ZL.ZOMBIE_SPAWN = {
     {
         position = {
             x = -2070.546143, 

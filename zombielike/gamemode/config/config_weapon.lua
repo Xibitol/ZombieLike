@@ -1,4 +1,4 @@
-ZL.weapons = {
+ZL.WEAPON = {
     { -- Hand
         name = "Hand",
         entity = "zl_hand",

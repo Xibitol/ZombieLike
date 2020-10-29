@@ -26,18 +26,23 @@ AddCSLuaFile("shared.lua")
 include("shared.lua")
 
 ----- Include Module -----
-AddCSLuaFile("modules/gamestatus/cl_gamestatus.lua") -- Main Module
-include("modules/gamestatus/sv_gamestatus.lua")
+local moduleFolder = GM.FolderName.."/gamemode/modules/"
+local files, folders = file.Find(moduleFolder.."*", "LUA")
 
-AddCSLuaFile("modules/zldraw/zl_draw.lua") -- Main draw module
+for k,v in ipairs(folders) do
+    for kF,vF in ipairs(file.Find(moduleFolder..v.."/sh_*.lua", "LUA")) do
+        AddCSLuaFile(moduleFolder..v.."/"..vF)
+        include(moduleFolder..v.."/"..vF)
+    end
 
-AddCSLuaFile("modules/menusystem/cl_menusystem.lua")
-AddCSLuaFile("modules/menusystem/cl_modelPanel.lua")
-include("modules/menusystem/sv_menusystem.lua")
+    for kF,vF in ipairs(file.Find(moduleFolder..v.."/sv_*.lua", "LUA")) do
+        include(moduleFolder..v.."/"..vF)
+    end
 
-AddCSLuaFile("modules/zombiemanager/cl_zombienetwork.lua")
-include("modules/zombiemanager/sv_zombienetwork.lua")
-include("modules/zombiemanager/sv_zombiemanager.lua")
+    for kF,vF in ipairs(file.Find(moduleFolder..v.."/cl_*.lua", "LUA")) do
+        AddCSLuaFile(moduleFolder..v.."/"..vF)
+    end
+end
 --------------------------
 util.AddNetworkString("PlayerSpawn")
 util.AddNetworkString("InitPostPlayer")
@@ -52,7 +57,7 @@ end
 function GM:PlayerSpawn(ply)
     PrintMessage(HUD_PRINTTALK, ply:GetName().." has spawned.")
 
-    ply:SetModel(ZL.allowedModel.models[ZL.allowedModel.currentIndex])
+    ply:SetModel(ZL.MODEL.models[ZL.MODEL.currentIndex])
 
     net.Start("PlayerSpawn")
     net.WriteEntity(ply)

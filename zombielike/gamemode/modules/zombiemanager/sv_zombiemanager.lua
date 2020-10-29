@@ -9,18 +9,18 @@ hook.Add("Play", "ZombieManager_HookPlay_SV", function()
     print("Wave : "..ZL.wave, "Zombie : "..ZL.remainingZombie)
 
     timer.Create("zombieSpawn", 0.5, ZL.remainingZombie, function()
-        local randomPoint = ZL.spawnLocation[math.random(1, table.getn(ZL.spawnLocation))]
+        local randomPoint = ZL.ZOMBIE_SPAWN[math.random(1, table.getn(ZL.ZOMBIE_SPAWN))]
         local randomX = math.random(randomPoint.position.x - randomPoint.raduis, randomPoint.position.x + randomPoint.raduis)
         local randomY = math.random(randomPoint.position.y - randomPoint.raduis, randomPoint.position.y + randomPoint.raduis)
 
-        local randomZombie = ZL.zombies[math.random(1, table.getn(ZL.zombies))]
+        local randomZombie = ZL.ZOMBIE[math.random(1, table.getn(ZL.ZOMBIE))]
         while randomZombie.minimalWave > ZL.wave do
-            randomZombie = ZL.zombies[math.random(1, table.getn(ZL.zombies))]
+            randomZombie = ZL.ZOMBIE[math.random(1, table.getn(ZL.ZOMBIE))]
         end
 
-        local zombie = ents.Create(randomZombie.entity)
-        zombie:SetPos(Vector(randomX, randomY, randomPoint.position.z))
-        zombie:Spawn()
+        local ActualZombie = ents.Create(randomZombie.entity)
+        ActualZombie:SetPos(Vector(randomX, randomY, randomPoint.position.z))
+        ActualZombie:Spawn()
 
         table.insert(zombieList, "zombie")
     end)
@@ -30,7 +30,7 @@ function GM:OnNPCKilled(npc, a, i)
     table.remove(zombieList)
     ZL.SetRemainingZombie(ZL.remainingZombie - 1)
 
-    for k,v in ipairs(ZL.zombies) do
+    for k,v in ipairs(ZL.ZOMBIE) do
         if npc:GetClass() == v.entity then
             a:SetExperience(a:GetExperience() + v.experience)
         end

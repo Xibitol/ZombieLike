@@ -85,7 +85,7 @@ hook.Add("Play", "GameStatus_HookPlay_SV", function()
         vP:SetExperience(0)
         vP:SetHighestExperience(0)
 
-        for kW,vW in ipairs(ZL.weapons) do
+        for kW,vW in ipairs(ZL.WEAPON) do
             if vW.onStart then
                 vP:Give(vW.entity, true)
                 if vW.charger then

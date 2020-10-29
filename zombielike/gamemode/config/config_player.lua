@@ -1,4 +1,4 @@
-ZL.allowedModel = {
+ZL.MODEL = {
     base = "models/player/Group01/male_02.mdl",
     models = {
         ---- Female model ----
