@@ -43,10 +43,12 @@ hook.Add("PlayThink", "ZombieManager_HookPlay_SV", function()
     end
 end)
 
-hook.Add("WaveTransition", "ZombieManager_HookWaveTransition_SV", function()
+function killAllNpc()
     for k,v in ipairs(ents.GetAll()) do
-        if v:IsNPC() then
-            v:TakeDamage(999)
-        end
+        if v:IsNPC() then v:TakeDamage(999) end
     end
+end
+hook.Add("WaveTransition", "ZombieManager_HookWaveTransition_SV", function()
+    killAllNpc()
+    killAllNpc()
 end)

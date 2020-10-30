@@ -5,6 +5,7 @@ Data = {
 }
 zombieNumber = 0
 zombieKilledMsg = {}
+delay = CurTime()
 
 local yPI, wPI, hPI = 15, 225, 23
 local yW, wW, hW = 50, 1200, 18
@@ -60,7 +61,21 @@ hook.Add("HUDPaint", "Hud_HookHud_CL", function()
 
     -- Zombie points
     for k,v in ipairs(zombieKilledMsg) do
-		ZLDraw.Text("+ "..v.value.."xp", "ZL10", v.pos.x, v.pos.y, Color( 255, 255, 255 ), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+        print(delay, CurTime())
+        if delay < CurTime() then
+            v.pos.y = v.pos.y - 4
+            print(v.pos.y, v.value)
+            v.alpha = v.alpha - 3
+            print(v.alpha, v.value)
+        elseif v.alpha <= 0 then
+            table.RemoveByValue(zombieKilledMsg, v)
+        end
+
+        ZLDraw.Text("+ "..v.value.."xp", "ZL10", v.pos.x, v.pos.y, Color(212, 44, 76, v.alpha), TEXT_ALIGN_CENTER, TEXT_ALIGN_CENTER)
+    end
+
+    if delay < CurTime() then
+        delay = CurTime() + 0.05
     end
 end)
 hook.Add("HUDShouldDraw", "Hud_HookHudShouldDraw_CL", function(name)
@@ -77,19 +92,21 @@ hook.Add("WaveTransition", "Hud_HookWaveTransition_CL", function()
     end)
 end)
 
-net.Receive("OnNPCKilled_Hud", function()
-    local npc = net.ReadEntity()
+gameevent.Listen("entity_killed")
+hook.Add("entity_killed", "Hud_HookEntityKilled_CL", function(data)
+    if LocalPlayer() ~= ents.GetByIndex(data.entindex_attacker) then return end
+
+    local npc = ents.GetByIndex(data.entindex_killed)
+    print(npc:GetClass())
 
     for k,v in ipairs(ZL.ZOMBIE) do
         if npc:GetClass() == v.entity then
-            local point = ent:GetPos() + ent:OBBCenter()*2
+            local point = npc:GetPos() + npc:OBBCenter()*2
             local point2D = point:ToScreen()
 
-            if not point2D.visible then return end
+            if not point2D.visible then continue end
 
             table.insert(zombieKilledMsg, {value = v.experience, pos = {x=point2D.x, y=point2D.y}, alpha = 255})
         end
     end
-
-    PrintTable(zombieKilledMsg)
 end)

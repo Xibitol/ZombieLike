@@ -45,7 +45,7 @@ ZL.ZOMBIE = {
     },
     { -- Poison headcrab
         name = "Poison headcrab",
-        entity = "npc_headcrab_black",
+        entity = "npc_headcrab_poison",
         experience = 105,
         minimalWave = 11
     },
