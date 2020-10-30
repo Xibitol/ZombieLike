@@ -96,15 +96,12 @@ hook.Add("Play", "GameStatus_HookPlay_SV", function()
         end
     end
 
-    for kN,vN in ipairs(ents.GetAll()) do
-        vN:RemoveAllDecals()
-
-        for kZ,vZ in ipairs(ZL.ZOMBIE) do
-            if vN:GetClass() == vZ.entity then
-                vN:Remove()
-            end
-        end
+    for k,v in ipairs(ents.GetAll()) do
+        v:RemoveAllDecals()
     end
+
+    RunConsoleCommand("g_ragdoll_maxcount", 0)
+    timer.Simple(1, function() RunConsoleCommand("g_ragdoll_maxcount", 32) end)
 end)
 hook.Add("WaveTransition", "GameStatus_HookPlay_SV", function()
     timer.Simple(ZL.WAVE_TRANSITION_TIME, function()
