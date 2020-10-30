@@ -8,7 +8,7 @@ Link to gamemode steam page : [ZombieLike]()
 **Important :** You must have all "FA:S 2.0 Alpha SWEPs" addons and "Map for ZombieLike" addon. A collection to make your life easier : [ZombieLike Collection](https://steamcommunity.com/sharedfiles/filedetails/?id=2119249878)
 
 ## Modules
-[See all tasks](https://github.com/Xibitol/ZombieLike/blob/master/TASKS.md)
+[See all tasks](https://github.com/Xibitol/ZombieLike/blob/master/TASK.md)
 
 ### Init files
 - **Finished**
