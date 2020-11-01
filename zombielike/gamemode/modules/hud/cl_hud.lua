@@ -61,12 +61,9 @@ hook.Add("HUDPaint", "Hud_HookHud_CL", function()
 
     -- Zombie points
     for k,v in ipairs(zombieKilledMsg) do
-        print(delay, CurTime())
         if delay < CurTime() then
             v.pos.y = v.pos.y - 4
-            print(v.pos.y, v.value)
             v.alpha = v.alpha - 3
-            print(v.alpha, v.value)
         elseif v.alpha <= 0 then
             table.RemoveByValue(zombieKilledMsg, v)
         end
@@ -97,7 +94,6 @@ hook.Add("entity_killed", "Hud_HookEntityKilled_CL", function(data)
     if LocalPlayer() ~= ents.GetByIndex(data.entindex_attacker) then return end
 
     local npc = ents.GetByIndex(data.entindex_killed)
-    print(npc:GetClass())
 
     for k,v in ipairs(ZL.ZOMBIE) do
         if npc:GetClass() == v.entity then

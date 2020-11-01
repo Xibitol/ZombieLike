@@ -1,0 +1,16 @@
+net.Receive("F4MENU_OpenMenu", function()
+    f4menu = vgui.Create("DF4Menu")
+    f4menu:SetPos(ScrW()/5, ScrH()/5)
+    f4menu:SetSize(ScrW()/5*3, ScrH()/5*3)
+    f4menu:SetVisible(true)
+    f4menu:MakePopup()
+
+    local dashboardTab = vgui.Create("DDashboard")
+    f4menu:AddTab("Dashboard", dashboardTab)
+    local weaponTab = vgui.Create("DPanel")
+    f4menu:AddTab("Weapon", weaponTab)
+    local otherTab = vgui.Create("DPanel")
+    f4menu:AddTab("Other", otherTab)
+
+    f4menu:SelectTab("Dashboard")
+end)

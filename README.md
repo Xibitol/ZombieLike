@@ -21,7 +21,8 @@ Link to gamemode steam page : [ZombieLike]()
 - [ ] On Build, give physgun and zl_hand
 
 ### GameData (_MainDataModule_)
-- **Finished**
+- In progress
+- [ ] Set player network variable ("Experience", "HighestExperience", "Kill", "Death")
 
 ### MenuSystem
 - _In waiting_
@@ -31,16 +32,16 @@ Link to gamemode steam page : [ZombieLike]()
 - **Finished**
 
 ### Hud
-- In progress
+- _In waiting_
 - [ ] Draw the player's health and name on the top of his head.
 
 ### F4Menu
-- _In waiting_
-- [ ] Draw a F4Menu
+- In progress
 - [ ] Can open if the game status is "WaveTransition"
-- [ ] Easy creating tab in menu
+- [ ] Draw shop tab
 #### Dashboard
-- [ ] Can see player's stats (Name, Model, Health, Battery, ZombieKilled and Experiance)
+- [ ] Draw Dashboard tab
+- [ ] Can see player's stats (Name, Model, Health, Battery, Experience, HighestExperience, Kill, Death)
 - [ ] The host can stop the game
 #### Weapons
 - [ ] Buy weapon (Entity, OnBuyCharger)
@@ -60,13 +61,13 @@ Link to gamemode steam page : [ZombieLike]()
 ### ScoreBoard
 - _In waiting_
 - [ ] Draw a Scoreboard
-- [ ] Look players stats (Health, Battery, ZombieKilled, Experiance and HighestExperiance)
+- [ ] Look players stats (Health, Battery, Kill, Death, HighestExperience)
 - [ ] For host : kick player, remove all weapons except the starting, clear experiance
 
 ### FinishSystem
 - _In waiting_
 - [ ] Show this if all players death or host stop game
-- [ ] Display the best player stats (three maximum), for the player who has the most ammo, who has killed the most zombies and who has sympathized with the enemy (who has killed the least zombies).
+- [ ] Display the best player stats (three maximum), for the player who has the most ammo, who has most killed and who has most dead.
 - [ ] Go, with a wait, in the menu
 - [ ] If this is a new highest score save it
 

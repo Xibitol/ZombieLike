@@ -32,8 +32,8 @@
 - [x] Update Client and Server
 
 ### GameData (_MainDataModule_)
-- **Finished**
-- [x] Set player network variable ("ZombieKilled","Experiance","HighestExperiance")
+- In progress
+- [ ] Set player network variable ("Experience", "HighestExperience", "Kill", "Death")
 
 ### MenuSystem
 - _In waiting_
@@ -50,22 +50,24 @@
 - [x] Create wave's and remaining zombie's variable and update Client and Server
 - [x] Spawn zombie with a config file (Position, Raduis)
 - [x] Create waves infinites and spawn zombies in function him count and number of player connected (Wave 1 == Nombre de joueurs connectés pour le nombre de zombie)
-- [x] Give point to player on kill zombie
+- [x] Give point to player on kill zombie and add one kill
 
 ### Hud
-- In progress
+- _In waiting_
 - [x] Draw a hud (Health, Battery)
 - [ ] Draw the player's health and name on the top of his head.
 - [x] Draw wave number and number of zombie alive or Draw wave transition time left
 - [x] Draw points winned after killing zombie on screen
 
 ### F4Menu
-- _In waiting_
-- [ ] Draw a F4Menu
+- In progress
+- [x] Draw a F4Menu
 - [ ] Can open if the game status is "WaveTransition"
-- [ ] Easy creating tab in menu
+- [x] Easy creating tab in menu
+- [ ] Draw shop tab
 #### Dashboard
-- [ ] Can see player's stats (Name, Model, Health, Battery, ZombieKilled and Experiance)
+- [ ] Draw Dashboard tab
+- [ ] Can see player's stats (Name, Model, Health, Battery, Experience, HighestExperience, Kill, Death)
 - [ ] The host can stop the game
 #### Weapons
 - [x] Config file for element (Name, Price)
@@ -86,12 +88,12 @@
 ### ScoreBoard
 - _In waiting_
 - [ ] Draw a Scoreboard
-- [ ] Look players stats (Health, Battery, ZombieKilled, Experiance and HighestExperiance)
+- [ ] Look players stats (Health, Battery, Kill, Death, HighestExperience)
 - [ ] For host : kick player, remove all weapons except the starting, clear experiance
 
 ### FinishSystem
 - _In waiting_
 - [ ] Show this if all players death or host stop game
-- [ ] Display the best player stats (three maximum), for the player who has the most ammo, who has killed the most zombies and who has sympathized with the enemy (who has killed the least zombies).
+- [ ] Display the best player stats (three maximum), for the player who has the most ammo, who has most killed and who has most dead.
 - [ ] Go, with a wait, in the menu
 - [ ] If this is a new highest score save it
